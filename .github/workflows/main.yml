@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Sagra di Fellegara</title>
+    <style>
+        :root {
+            --primary: #d32f2f;
+            --secondary: #388e3c;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f4f6f7; color: var(--dark); }
+        header { background: var(--primary); color: white; text-align: center; padding: 2rem 1rem; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 2.5rem; letter-spacing: 1px; }
+        
+        /* Icona Admin */
+        .admin-lock { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+        .admin-lock:hover { background: white; color: var(--primary); }
+
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .section { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        h2 { border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; color: var(--primary); }
+        
+        /* Menu Clienti */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .menu-cat h3 { color: var(--dark); border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+        .menu-item { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 1.1rem; }
+        .menu-item .price { font-weight: bold; color: var(--secondary); }
+
+        /* Area Prenotazioni e Piantina */
+        .time-slots { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
+        .slot-btn { padding: 0.8rem 1.5rem; border: 2px solid var(--primary); background: white; color: var(--primary); font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .slot-btn.active { background: var(--primary); color: white; }
+        
+        .map-container { background: #eef2f3; border: 2px dashed #bdc3c7; padding: 2rem; border-radius: 8px; text-align: center; }
+        .grid-tavoli { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 1.5rem; }
+        
+        .tavolo { width: 100px; height: 100px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .tavolo.libero { background: var(--secondary); }
+        .tavolo.libero:hover { transform: scale(1.05); }
+        .tavolo.occupato { background: var(--primary); cursor: not-allowed; opacity: 0.8; }
+        .tavolo span { font-size: 0.8rem; font-weight: normal; margin-top: 5px; }
+
+        /* Modale Prenotazione */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100; }
+        .modal-content { background: white; padding: 2rem; border-radius: 8px; width: 90%; max-width: 400px; position: relative; }
+        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
+        
+        /* Form e Input standard */
+        label { display: block; margin-top: 1rem; font-weight: bold; }
+        input, select { width: 100%; padding: 0.5rem; margin-top: 0.3rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button.btn-submit { width: 100%; background: var(--secondary); color: white; border: none; padding: 0.8rem; margin-top: 1.5rem; border-radius: 4px; font-weight: bold; cursor: pointer; }
+
+        /* Pannello Admin */
+        #admin-panel { display: none; background: #2c3e50; color: white; padding: 2rem; border-radius: 8px; margin-top: 2rem; }
+        #admin-panel h2, #admin-panel h3 { color: #ecf0f1; border-color: #34495e; }
+        #admin-panel label { color: #ecf0f1; }
+        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1.5rem; }
+        .admin-box { background: #34495e; padding: 1.5rem; border-radius: 6px; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 1rem; background: white; color: var(--dark); }
+        .admin-table th, .admin-table td { padding: 0.5rem; border: 1px solid #ddd; text-align: left; }
+        .admin-table th { background: #eee; }
+        .logout-btn { background: #7f8c8d; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; float: right; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LA SAGRA DI FELLEGARA</h1>
+        <button class="admin-lock" onclick="loginAdmin()">🔒 Area Riservata Titolare</button>
+    </header>
+
+    <div class="container">
+        
+        <!-- ================= SEZIONE MENU CLIENTI ================= -->
+        <div class="section">
+            <h2>🍽️ Il Nostro Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-cat">
+                    <h3>Primi e Secondi</h3>
+                    <div id="menu-cibi">
+                        <div class="menu-item"><span>Tortelli di Zucca</span><span class="price">10.00 €</span></div>
+                        <div class="menu-item"><span>Grigliata Mista</span><span class="price">12.00 €</span></div>
+                    </div>
+                </div>
+                <div class="menu-cat">
+                    <h3>Bevande</h3>
+                    <div id="menu-bevande">
+                        <div class="menu-item"><span>Lambrusco D.O.C.</span><span class="price">8.00 €</span></div>
+                        <div class="menu-item"><span>Acqua Naturale/Gassata</span><span class="price">2.00 €</span></div>
+                    </div>
+                </div>
+                <div class="menu-cat">
+                    <h3>Dolci</h3>
+                    <div id="menu-dolci">
+                        <div class="menu-item"><span>Zuppa Inglese</span><span class="price">4.50 €</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SEZIONE PRENOTAZIONE TAVOLI ================= -->
+        <div class="section">
+            <h2>📅 Prenota il tuo Tavolo</h2>
+            <p>Seleziona prima la fascia oraria, poi clicca su un tavolo verde per riservarlo.</p>
+            
+            <div class="time-slots">
+                <button class="slot-btn active" onclick="changeSlot('19:00-21:30')">🕒 19:00 - 21:30</button>
+                <button class="slot-btn" onclick="changeSlot('21:30-23:30')">🕒 21:30 - 23:30</button>
+            </div>
+
+            <div class="map-container">
+                <h3>PIANTINA TAVOLI (Vista dall'alto)</h3>
+                <div class="grid-tavoli" id="piantina-clienti">
+                    <!-- Generati da JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PANNELLO ADMIN (NASCOSTO) ================= -->
+        <div id="admin-panel">
+            <button class="logout-btn" onclick="logoutAdmin()">Esci da Admin</button>
+            <h2>🛠️ Pannello di Controllo Titolare</h2>
+            
+            <div class="admin-grid">
+                <!-- Aggiungi al Menu -->
+                <div class="admin-box">
+                    <h3>Aggiungi Elemento al Menu</h3>
+                    <form id="form-menu" onsubmit="aggiungiMenu(event)">
+                        <label>Nome Piatto/Bevanda</label>
+                        <input type="text" id="admin-menu-nome" required placeholder="Es. Patatine Fritte">
+                        
+                        <label>Prezzo (€)</label>
+                        <input type="number" step="0.01" id="admin-menu-prezzo" required placeholder="Es. 4.50">
+                        
+                        <label>Categoria</label>
+                        <select id="admin-menu-cat">
+                            <option value="cibi">Cibo</option>
+                            <option value="bevande">Bevanda</option>
+                            <option value="dolci">Dolce</option>
+                        </select>
+                        <button type="submit" class="btn-submit">Aggiungi al Menu</button>
+                    </form>
+                </div>
+
+                <!-- Aggiungi Tavolo -->
+                <div class="admin-box">
+                    <h3>Aggiungi Tavolo alla Piantina</h3>
+                    <form id="form-tavolo" onsubmit="aggiungiTavolo(event)">
+                        <label>Nome / Numero Tavolo</label>
+                        <input type="text" id="admin-tavolo-nome" required placeholder="Es. Tavolo 5">
+                        
+                        <label>Posti Massimi</label>
+                        <input type="number" id="admin-tavolo-posti" required placeholder="Es. 6">
+                        
+                        <button type="submit" class="btn-submit">Crea Tavolo nella Piantina</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Registro Prenotazioni -->
+            <div class="admin-box" style="margin-top:2rem;">
+                <h3>Elenco Tavoli e Registro Prenotazioni</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Tavolo</th>
+                            <th>Posti Max</th>
+                            <th>Fascia 19:00-21:30</th>
+                            <th>Fascia 21:30-23:30</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-tabella-tavoli">
+                        <!-- Generato da JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODALE DI PRENOTAZIONE -->
+    <div class="modal" id="booking-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Prenota il Tavolo</h3>
+            <form id="form-prenota" onsubmit="confermaPrenotazione(event)">
+                <input type="hidden" id="modal-tavolo-id">
+                
+                <label>Nome</label>
+                <input type="text" id="client-nome" required>
+                
+                <label>Cognome</label>
+                <input type="text" id="client-cognome" required>
+                
+                <label>Numero di Telefono</label>
+                <input type="tel" id="client-tel" required>
+                
+                <button type="submit" class="btn-submit">Conferma Prenotazione</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGICA IN JAVASCRIPT PER SIMULARE IL DATABASE -->
+    <script>
+        // Dati iniziali della Sagra (Simulazione Database)
+        let tavoli = [
+            { id: 1, nome: "Tavolo 1", posti: 4, prenotazioni: { "19:00-21:30": null, "21:30-23:30": null } },
+            { id: 2, nome: "Tavolo 2", posti: 6, prenotazioni: { "19:00-21:30": {nome:"Mario", cognome:"Rossi", tel:"333123"}, "21:30-23:30": null } },
+            { id: 3, nome: "Tavolo 3", posti: 8, prenotazioni: { "19:00-21:30": null, "21:30-23:30": {nome:"Luca", cognome:"Verdi", tel:"339888"} } }
+        ];
+        
+        let currentSlot = "19:00-21:30";
+
+        // Funzione per gestire l'accesso Admin
+        function loginAdmin() {
+            let pass = prompt("Inserisci la password dell'amministratore:");
+            if(pass === "sagra26") {
+                document.getElementById('admin-panel').style.display = 'block';
+                document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
+                aggiornaAdminTable();
+            } else if (pass !== null) {
+                alert("Password errata!");
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin-panel').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Cambia la fascia oraria visualizzata dai clienti
+        function changeSlot(slot) {
+            currentSlot = slot;
+            document.querySelectorAll('.slot-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderPiantina();
+        }
+
+        // Mostra i tavoli graficamente
+        function renderPiantina() {
+            const container = document.getElementById('piantina-clienti');
+            container.innerHTML = "";
+            
+            tavoli.forEach(t => {
+                const infoPrenotazione = t.prenotazioni[currentSlot];
+                const div = document.createElement('div');
+                div.className = `tavolo ${infoPrenotazione ? 'occupato' : 'libero'}`;
+                div.innerHTML = `${t.nome} <span>Max: ${t.posti} p.</span>`;
+                
+                if(!infoPrenotazione) {
+                    div.onclick = () => openModal(t.id, t.nome);
+                }
+                container.appendChild(div);
+            });
+        }
+
+        // Gestione inserimento piatti dal pannello admin
+        function aggiungiMenu(e) {
+            e.preventDefault();
+            const nome = document.getElementById('admin-menu-nome').value;
+            const prezzo = parseFloat(document.getElementById('admin-menu-prezzo').value).toFixed(2);
+            const cat = document.getElementById('admin-menu-cat').value;
+
+            const targetDiv = document.getElementById(`menu-${cat}`);
+            const item = document.createElement('div');
+            item.className = 'menu-item';
+            item.innerHTML = `<span>${nome}</span><span class="price">${prezzo} €</span>`;
+            targetDiv.appendChild(item);
+
+            document.getElementById('form-menu').reset();
+            alert("Piatto aggiunto con successo al menu!");
+        }
+
+        // Gestione inserimento nuovi tavoli dal pannello admin
+        function aggiungiTavolo(e) {
+            e.preventDefault();
+            const nome = document.getElementById('admin-tavolo-nome').value;
+            const posti = parseInt(document.getElementById('admin-tavolo-posti').value);
+            const newId = tavoli.length + 1;
+
+            tavoli.push({
+                id: newId,
+                nome: nome,
+                posti: posti,
+                prenotazioni: { "19:00-21:30": null, "21:30-23:30": null }
+            });
+
+            document.getElementById('form-tavolo').reset();
+            renderPiantina();
+            aggiornaAdminTable();
+            alert("Nuovo tavolo inserito nella piantina!");
+        }
+
+        // Aggiorna il registro delle prenotazioni visibile solo all'admin
+        function aggiornaAdminTable() {
+            const tbody = document.getElementById('admin-tabella-tavoli');
+            tbody.innerHTML = "";
+            
+            tavoli.forEach(t => {
+                const p1 = t.prenotazioni["19:00-21:30"];
+                const p2 = t.prenotazioni["21:30-23:30"];
+                
+                const txtP1 = p1 ? `🔴 Occ: ${p1.nome} ${p1.cognome} (${p1.tel})` : "🟩 Libero";
+                const txtP2 = p2 ? `🔴 Occ: ${p2.nome} ${p2.cognome} (${p2.tel})` : "🟩 Libero";
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${t.nome}</strong></td>
+                    <td>${t.posti} posti</td>
+                    <td>${txtP1}</td>
+                    <td>${txtP2}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Finestra Pop-up per prenotare
+        function openModal(id, nome) {
+            document.getElementById('booking-modal').style.display = 'flex';
+            document.getElementById('modal-title').innerText = `Prenota ${nome} (Fascia ${currentSlot})`;
+            document.getElementById('modal-tavolo-id').value = id;
+        }
+
+        function closeModal() {
+            document.getElementById('booking-modal').style.display = 'none';
+            document.getElementById('form-prenota').reset();
+        }
+
+        function confermaPrenotazione(e) {
+            e.preventDefault();
+            const id = parseInt(document.getElementById('modal-tavolo-id').value);
+            const nome = document.getElementById('client-nome').value;
+            const cognome = document.getElementById('client-cognome').value;
+            const tel = document.getElementById('client-tel').value;
+
+            const tavolo = tavoli.find(t => t.id === id);
+            if(tavolo) {
+                tavolo.prenotazioni[currentSlot] = { nome, cognome, tel };
+                alert(`Prenotazione completata con successo per il ${tavolo.nome}!`);
+                closeModal();
+                renderPiantina();
+                aggiornaAdminTable();
+            }
+        }
+
+        // Avvio iniziale del sito
+        renderPiantina();
+    </script>
+</body>
+</html>

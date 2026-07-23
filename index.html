@@ -70,7 +70,7 @@
   @media (prefers-reduced-motion: reduce){
     .bulb{animation:none;}
   }
-
+ 
   /* ---------- header ---------- */
   header{
     text-align:center;
@@ -118,10 +118,21 @@
     transition:background .2s, transform .2s;
   }
   .admin-btn:hover{background:rgba(244,233,208,.16); transform:translateY(-1px);}
+  .refresh-link{
+    margin-top:10px;
+    background:none;
+    border:none;
+    color:#c9c3e6;
+    font-family:'Inter',sans-serif;
+    font-size:.78rem;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  .refresh-link:hover{color:var(--cream);}
   .admin-btn:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{
     outline:2px solid var(--gold); outline-offset:2px;
   }
-
+ 
   /* ---------- nav tabs ---------- */
   nav.tabs{
     display:flex;
@@ -149,7 +160,7 @@
     box-shadow:0 4px 18px rgba(242,181,68,.35);
   }
   .tab-btn:not(.active):hover{background:rgba(244,233,208,.1);}
-
+ 
   .ig-btn{
     display:inline-flex;
     align-items:center;
@@ -167,12 +178,17 @@
     border-color:transparent;
     transform:translateY(-1px);
   }
-
+  .wa-btn:hover{
+    background:#25D366;
+    border-color:transparent;
+    transform:translateY(-1px);
+  }
+ 
   main{max-width:960px; margin:0 auto; padding:10px 18px 70px;}
   section.view{display:none;}
   section.view.active{display:block; animation:fadeIn .35s ease;}
   @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
-
+ 
   /* ---------- menu ---------- */
   .menu-grid{
     display:grid;
@@ -230,7 +246,7 @@
     color:var(--gold);
     white-space:nowrap;
   }
-
+ 
   /* ---------- piantina ---------- */
   .fascia-picker{
     display:flex;
@@ -257,7 +273,64 @@
     box-shadow:0 4px 18px rgba(193,68,45,.4);
   }
   .fascia-btn:hover:not(.active){background:rgba(244,233,208,.12);}
-
+ 
+  .giorno-picker{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:18px 0 14px;
+  }
+  .giorno-btn{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    padding:10px 16px;
+    border-radius:12px;
+    border:1px solid rgba(244,233,208,.22);
+    background:rgba(244,233,208,.05);
+    color:var(--cream);
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .giorno-btn.active{
+    background:var(--olive-bright);
+    border-color:var(--olive-bright);
+    color:var(--ink);
+    box-shadow:0 4px 18px rgba(127,179,86,.35);
+  }
+  .giorno-btn:hover:not(.active){background:rgba(244,233,208,.12);}
+ 
+  .riepilogo-posti{
+    text-align:center;
+    font-size:.85rem;
+    color:#c9c3e6;
+    margin:14px 0 0;
+  }
+  .riepilogo-posti strong{color:var(--gold-soft);}
+ 
+  .mia-prenot-toggle{
+    display:block;
+    text-align:center;
+    margin:18px auto 0;
+    background:none;
+    border:none;
+    color:var(--gold-soft);
+    font-size:.85rem;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+ 
+  .edit-row{
+    display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;
+    background:rgba(244,233,208,.06);
+    border-radius:10px;
+    padding:10px;
+    margin:6px 0;
+  }
+  .edit-row .f{flex:1; min-width:100px;}
+  .edit-row label{margin:0 0 4px; font-size:.72rem;}
+ 
   .legend{
     display:flex;
     justify-content:center;
@@ -270,7 +343,7 @@
   .dot{width:12px; height:12px; border-radius:50%; display:inline-block;}
   .dot.libero{background:var(--olive-bright); box-shadow:0 0 8px rgba(127,179,86,.7);}
   .dot.occupato{background:var(--red-occ); box-shadow:0 0 8px rgba(193,68,45,.7);}
-
+ 
   .piazza{
     margin-top:22px;
     background:
@@ -332,7 +405,7 @@
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   .tavolo-wrap{display:flex; flex-direction:column; align-items:center;}
-
+ 
   /* ---------- modali ---------- */
   .overlay{
     position:fixed; inset:0;
@@ -418,7 +491,7 @@
     opacity:.75;
   }
   .pass-toggle:hover{opacity:1;}
-
+ 
   .field-error{color:var(--red-occ); font-size:.78rem; margin-top:6px; display:none;}
   .info-box{
     background:rgba(244,233,208,.06);
@@ -443,7 +516,7 @@
     box-shadow:0 8px 24px rgba(0,0,0,.35);
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
-
+ 
   /* ---------- prenotazioni pubbliche ---------- */
   .prenot-pubbliche{margin-top:34px;}
   .prenot-pubbliche-title{
@@ -479,7 +552,7 @@
   table.prenot-pub th, table.prenot-pub td{text-align:left; padding:7px 6px; border-bottom:1px solid rgba(244,233,208,.1);}
   table.prenot-pub th{color:var(--gold-soft); font-size:.68rem; text-transform:uppercase; letter-spacing:.04em;}
   .prenot-pub-empty{color:#9a94bd; font-family:'Caveat',cursive; font-size:1.1rem; padding:4px 0;}
-
+ 
   /* ---------- admin inline (non più overlay, per compatibilità) ---------- */
   .admin-inline{
     margin:14px 0 30px;
@@ -499,7 +572,7 @@
     color:var(--gold-soft);
   }
   .admin-box p.desc{color:#c9c3e6; font-size:.88rem; margin:0 0 14px;}
-
+ 
   /* ---------- admin panel ---------- */
   .admin-tabs{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;}
   .admin-tab-btn{
@@ -532,21 +605,42 @@
   table.prenot th{color:var(--gold-soft); font-size:.72rem; text-transform:uppercase; letter-spacing:.04em;}
   .empty-admin{color:#9a94bd; font-family:'Caveat',cursive; font-size:1.1rem; padding:10px 0;}
   .logout-row{display:flex; justify-content:flex-end; margin-top:6px;}
-
+  .backup-box{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(244,233,208,.05);
+    border:1px solid rgba(244,233,208,.12);
+    border-radius:12px;
+    padding:14px 16px;
+    margin-top:20px;
+    font-size:.85rem;
+  }
+  .backup-box p.meta{color:#c9c3e6; font-size:.78rem;}
+ 
+  table.riepilogo{width:100%; border-collapse:collapse; font-size:.82rem; margin-bottom:20px;}
+  table.riepilogo th, table.riepilogo td{text-align:left; padding:7px 6px; border-bottom:1px solid rgba(244,233,208,.1);}
+  table.riepilogo th{color:var(--gold-soft); font-size:.68rem; text-transform:uppercase; letter-spacing:.04em;}
+  table.riepilogo td.num{font-family:'Space Mono', monospace;}
+ 
   footer{text-align:center; padding:24px; color:#6b6693; font-size:.78rem;}
 </style>
 </head>
 <body>
-
+ 
 <div class="lights-strip" id="lightsStrip"></div>
-
+ 
 <header>
   <div class="eyebrow">1 – 5 agosto · Via della Botte, 7, Fellegara</div>
   <h1 class="title">La Sagra di Fellegara</h1>
   <p class="subtitle">Musica, buon cibo, amici e tanto divertimento. Sfoglia il menu e prenota il tuo tavolo.</p>
   <button class="admin-btn" id="openAdminLogin">🔒 Area titolare</button>
+  <br>
+  <button class="refresh-link" id="refreshPageBtn">🔄 Aggiorna la pagina</button>
 </header>
-
+ 
 <nav class="tabs">
   <button class="tab-btn active" data-view="menu">🍝 Menu</button>
   <button class="tab-btn" data-view="piantina">🪑 Prenota un tavolo</button>
@@ -557,13 +651,18 @@
       <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle>
     </svg>
   </a>
+  <a class="ig-btn wa-btn" href="https://wa.me/393497225376" target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp" title="Scrivici su WhatsApp">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+      <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.24 8.24 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.55 3.7-8.25 8.26-8.25 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.84c0 4.55-3.71 8.23-8.26 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.13.17 1.73 2.64 4.2 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/>
+    </svg>
+  </a>
 </nav>
-
+ 
 <main>
-
+ 
   <!-- AREA TITOLARE (inline, non in overlay, per massima compatibilità) -->
   <section class="admin-inline" id="adminInline" style="display:none;">
-
+ 
     <!-- login -->
     <div id="adminLoginBox" class="admin-box">
       <h2>Area titolare</h2>
@@ -577,18 +676,18 @@
       <button type="button" class="btn btn-primary" id="loginSubmitBtn">Entra</button>
       <button type="button" class="btn btn-secondary" style="width:100%; margin-top:8px;" id="adminCloseBtn1">Chiudi</button>
     </div>
-
+ 
     <!-- pannello vero e proprio -->
     <div id="adminPanelBox" class="admin-box" style="display:none;">
       <h2>Pannello titolare</h2>
       <p class="desc">Gestisci menu, tavoli e le prenotazioni ricevute.</p>
-
+ 
       <div class="admin-tabs">
         <button class="admin-tab-btn active" data-admin="menu">Menu</button>
         <button class="admin-tab-btn" data-admin="tavoli">Tavoli</button>
         <button class="admin-tab-btn" data-admin="prenotazioni">Prenotazioni</button>
       </div>
-
+ 
       <!-- ADMIN: MENU -->
       <div class="admin-section active" id="admin-menu">
         <div class="add-form" id="addMenuForm">
@@ -614,7 +713,7 @@
         </div>
         <div id="adminMenuList"></div>
       </div>
-
+ 
       <!-- ADMIN: TAVOLI -->
       <div class="admin-section" id="admin-tavoli">
         <div class="add-form" id="addTavoloForm">
@@ -634,31 +733,46 @@
         </div>
         <div id="adminTavoliList"></div>
       </div>
-
+ 
       <!-- ADMIN: PRENOTAZIONI -->
       <div class="admin-section" id="admin-prenotazioni">
         <div id="adminPrenotList"></div>
       </div>
-
+ 
+      <div class="backup-box">
+        <div>
+          <strong>Backup dati</strong>
+          <p class="meta" style="margin:2px 0 0;">Scarica un file con menu, tavoli e prenotazioni, per non perdere nulla in caso di problemi col telefono.</p>
+        </div>
+        <button class="btn btn-secondary" id="downloadBackupBtn">⬇️ Scarica backup</button>
+      </div>
+ 
       <div class="logout-row">
         <button class="btn btn-secondary" id="adminLogoutBtn">Esci dall'area titolare</button>
       </div>
     </div>
-
+ 
   </section>
-
+ 
   <!-- MENU -->
   <section class="view active" id="view-menu">
     <div class="menu-grid" id="menuGrid"></div>
-
+ 
     <div class="prenot-pubbliche">
       <h2 class="prenot-pubbliche-title">Chi ha già prenotato</h2>
       <div class="fasce-pubbliche" id="fascePubbliche"></div>
     </div>
   </section>
-
+ 
   <!-- PIANTINA -->
   <section class="view" id="view-piantina">
+    <div class="giorno-picker" id="giornoPicker">
+      <button class="giorno-btn" data-giorno="1">Ven 1 ago</button>
+      <button class="giorno-btn" data-giorno="2">Sab 2 ago</button>
+      <button class="giorno-btn" data-giorno="3">Dom 3 ago</button>
+      <button class="giorno-btn" data-giorno="4">Lun 4 ago</button>
+      <button class="giorno-btn" data-giorno="5">Mar 5 ago</button>
+    </div>
     <div class="fascia-picker">
       <button class="fascia-btn" data-fascia="19:00 - 21:30">19:00 – 21:30</button>
       <button class="fascia-btn" data-fascia="21:30 - 23:30">21:30 – 23:30</button>
@@ -667,10 +781,25 @@
       <span><i class="dot libero"></i> Libero</span>
       <span><i class="dot occupato"></i> Occupato</span>
     </div>
+    <div class="riepilogo-posti" id="riepilogoPosti"></div>
     <div id="piazzaWrap"></div>
-
+ 
+    <button type="button" class="mia-prenot-toggle" id="miaPrenotToggle">🔍 Hai già prenotato? Cerca o annulla la tua prenotazione</button>
+ 
+    <div id="miaPrenotInline" style="display:none;">
+      <div class="admin-box" id="miaPrenotBox">
+        <h2>La tua prenotazione</h2>
+        <p class="desc">Inserisci il numero di telefono che hai usato per prenotare.</p>
+        <label for="miaPrenotTel">Numero di telefono</label>
+        <input type="tel" id="miaPrenotTel" placeholder="333 1234567">
+        <button type="button" class="btn btn-primary" id="miaPrenotCercaBtn">Cerca</button>
+        <button type="button" class="btn btn-secondary" style="width:100%; margin-top:8px;" id="miaPrenotCloseBtn">Chiudi</button>
+        <div id="miaPrenotRisultati" style="margin-top:14px;"></div>
+      </div>
+    </div>
+ 
     <div id="bookingInline" style="display:none;">
-
+ 
       <!-- form prenotazione -->
       <div id="bookingFormBox" class="admin-box">
         <h2 id="bookingTitle">Prenota il tavolo</h2>
@@ -681,49 +810,55 @@
         <input type="text" id="bkCognome" placeholder="Rossi">
         <label for="bkTelefono">Numero di telefono</label>
         <input type="tel" id="bkTelefono" placeholder="333 1234567">
+        <label for="bkPersone">Numero di persone</label>
+        <input type="number" id="bkPersone" min="1" placeholder="4">
         <div class="field-error" id="bookingError">Compila tutti i campi.</div>
         <button type="button" class="btn btn-primary" id="bookingSubmitBtn">Conferma prenotazione</button>
         <button type="button" class="btn btn-secondary" style="width:100%; margin-top:8px;" id="bookingCancelBtn">Annulla</button>
       </div>
-
+ 
       <!-- messaggio di successo -->
       <div id="bookingSuccessBox" class="admin-box" style="display:none; text-align:center;">
         <h2>Grazie per la tua prenotazione! 🎉</h2>
         <p class="desc" id="bookingSuccessDesc"></p>
         <button type="button" class="btn btn-primary" id="bookingSuccessCloseBtn">Torna alla piantina</button>
       </div>
-
+ 
       <!-- tavolo occupato -->
       <div id="bookingOccupiedBox" class="admin-box" style="display:none; text-align:center;">
         <h2>Tavolo occupato</h2>
-        <p class="desc">Questo tavolo è già stato prenotato per questa fascia oraria. Scegli un tavolo verde oppure prova l'altra fascia.</p>
+        <p class="desc">Questo tavolo è già stato prenotato per questo giorno e fascia oraria. Scegli un tavolo verde oppure prova un altro giorno/fascia.</p>
         <button type="button" class="btn btn-secondary" style="width:100%" id="bookingOccupiedCloseBtn">Ho capito</button>
       </div>
-
+ 
     </div>
   </section>
-
+ 
 </main>
-
-<footer>La Sagra di Fellegara · <span id="versionTag">v11</span></footer>
-
+ 
+<footer>La Sagra di Fellegara · <span id="versionTag">v14</span></footer>
+ 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
-
+ 
+<!-- Firebase: usato SOLO se configuri le credenziali qui sotto in FIREBASE_CONFIG. Se non lo fai, il sito funziona comunque normalmente con il salvataggio nel browser (localStorage), device per device. -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+ 
 <script>
 (function(){
   "use strict";
-
+ 
   window.addEventListener("error", function(e){
     console.error("Errore JS:", e.message, e.filename, e.lineno);
   });
-
+ 
   var ADMIN_PASSWORD = "Fellegara26";
   var LS_MENU = "sagra_menu";
   var LS_TAVOLI = "sagra_tavoli";
   var LS_PRENOTAZIONI = "sagra_prenotazioni";
   var SS_ADMIN = "sagra_admin_session";
-
+ 
   /* ---------- utilità storage (con fallback in memoria se localStorage è bloccato, es. file://) ---------- */
   var memoryStore = {};
   var storageBlocked = false;
@@ -735,7 +870,7 @@
     storageBlocked = true;
     console.warn("localStorage non disponibile in questo contesto (probabilmente apertura diretta del file). Uso una memoria temporanea: i dati non verranno salvati ricaricando la pagina.");
   }
-
+ 
   function loadJSON(key, fallback){
     try{
       if(storageBlocked){
@@ -750,24 +885,89 @@
     try{
       if(storageBlocked){
         memoryStore[key] = JSON.parse(JSON.stringify(val));
-        return;
+      }else{
+        localStorage.setItem(key, JSON.stringify(val));
       }
-      localStorage.setItem(key, JSON.stringify(val));
     }catch(e){
       storageBlocked = true;
       memoryStore[key] = JSON.parse(JSON.stringify(val));
+    }
+    if(firebaseEnabled && firebaseDb){
+      firebaseDb.collection("sagra_fellegara").doc(key).set({data: val, ts: Date.now()}).catch(function(e){
+        console.error("Errore salvataggio su Firebase:", e);
+      });
+    }
+  }
+ 
+  /* ---------- sincronizzazione multi-dispositivo con Firebase (opzionale) -----------
+     Per attivarla:
+     1. Vai su https://console.firebase.google.com e crea un progetto gratuito
+     2. Aggiungi una "app web" al progetto, copia la configurazione mostrata
+     3. Incolla i valori qui sotto al posto di "INSERISCI_QUI"
+     4. Nel progetto Firebase, apri "Firestore Database" e crealo (puoi usare le
+        regole di test per iniziare, poi eventualmente restringerle)
+     Finché i valori restano "INSERISCI_QUI", il sito continua a funzionare
+     esattamente come prima, salvando solo nel browser di ogni dispositivo. */
+  var FIREBASE_CONFIG = {
+    apiKey: "INSERISCI_QUI",
+    authDomain: "INSERISCI_QUI",
+    projectId: "INSERISCI_QUI",
+    storageBucket: "INSERISCI_QUI",
+    messagingSenderId: "INSERISCI_QUI",
+    appId: "INSERISCI_QUI"
+  };
+  var firebaseEnabled = false;
+  var firebaseDb = null;
+ 
+  function subscribeFirestore(key, onChange){
+    firebaseDb.collection("sagra_fellegara").doc(key).onSnapshot(function(snap){
+      if(snap.exists){
+        var val = snap.data().data;
+        try{
+          if(storageBlocked){ memoryStore[key] = val; }
+          else{ localStorage.setItem(key, JSON.stringify(val)); }
+        }catch(e){ memoryStore[key] = val; }
+      }else{
+        // primo avvio: non c'è ancora nulla su Firebase, carichiamo quello che abbiamo in locale
+        var local = loadJSON(key, null);
+        if(local !== null){
+          firebaseDb.collection("sagra_fellegara").doc(key).set({data: local, ts: Date.now()}).catch(function(){});
+        }
+      }
+      if(onChange) onChange();
+    }, function(err){
+      console.error("Errore sincronizzazione Firebase (" + key + "):", err);
+    });
+  }
+ 
+  function initFirebaseSync(){
+    if(FIREBASE_CONFIG.apiKey === "INSERISCI_QUI") return;
+    if(typeof firebase === "undefined"){
+      console.warn("Libreria Firebase non caricata (offline o bloccata): il sito continua a funzionare solo in locale.");
+      return;
+    }
+    try{
+      firebase.initializeApp(FIREBASE_CONFIG);
+      firebaseDb = firebase.firestore();
+      firebaseEnabled = true;
+      subscribeFirestore(LS_MENU, function(){ renderMenuPublic(); renderAdminMenu(); });
+      subscribeFirestore(LS_TAVOLI, function(){ renderPiazza(); renderAdminTavoli(); });
+      subscribeFirestore(LS_PRENOTAZIONI, function(){ renderPiazza(); renderPrenotazioniPubbliche(); renderAdminPrenotazioni(); });
+    }catch(e){
+      console.error("Errore inizializzazione Firebase:", e);
+      firebaseEnabled = false;
     }
   }
   function uid(){
     return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
   }
-
+ 
   /* ---------- dati iniziali (seed di esempio, modificabili dall'admin) ---------- */
   function hasKey(key){
     if(storageBlocked) return (key in memoryStore);
     try{ return localStorage.getItem(key) !== null; }catch(e){ return false; }
   }
-
+ 
   function seedIfEmpty(){
     if(!hasKey(LS_MENU)){
       saveJSON(LS_MENU, {
@@ -822,7 +1022,7 @@
   function MENU_EMPTY_FALLBACK(){ return {bevande:[], primi:[], secondi:[], contorni:[], dolci:[]}; }
   function MENU_EMPTY_FALLBACK_KEYS(){ return ["bevande","primi","secondi","contorni","dolci"]; }
   seedIfEmpty();
-
+ 
   /* ---------- lucine ---------- */
   var lightsStrip = document.getElementById("lightsStrip");
   for(var i=0;i<26;i++){
@@ -830,7 +1030,7 @@
     b.className = "bulb";
     lightsStrip.appendChild(b);
   }
-
+ 
   /* ---------- toast ---------- */
   var toastEl = document.getElementById("toast");
   var toastTimer = null;
@@ -840,7 +1040,7 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 2600);
   }
-
+ 
   /* ---------- overlay helpers ---------- */
   function openOverlay(id){ document.getElementById(id).classList.add("open"); }
   function closeOverlay(id){ document.getElementById(id).classList.remove("open"); }
@@ -855,7 +1055,7 @@
       document.querySelectorAll(".overlay.open").forEach(function(ov){ ov.classList.remove("open"); });
     }
   });
-
+ 
   /* ---------- nav tabs ---------- */
   document.querySelectorAll(".tab-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
@@ -866,7 +1066,7 @@
       document.getElementById("view-" + view).classList.add("active");
     });
   });
-
+ 
   /* ---------- render MENU pubblico ---------- */
   var MENU_CATS = ["bevande","primi","secondi","contorni","dolci"];
   var CAT_META = {
@@ -877,7 +1077,7 @@
     dolci: {label: "Dolci", icon: "🍰"}
   };
   var MENU_EMPTY = {bevande:[], primi:[], secondi:[], contorni:[], dolci:[]};
-
+ 
   function renderMenuPublic(){
     var menu = loadJSON(LS_MENU, MENU_EMPTY);
     var grid = document.getElementById("menuGrid");
@@ -915,81 +1115,111 @@
       grid.appendChild(card);
     });
   }
-
+ 
+  var GIORNI = [
+    {value:"1", label:"1 agosto"},
+    {value:"2", label:"2 agosto"},
+    {value:"3", label:"3 agosto"},
+    {value:"4", label:"4 agosto"},
+    {value:"5", label:"5 agosto"}
+  ];
+  function giornoLabel(v){
+    var g = GIORNI.filter(function(x){ return x.value === v; })[0];
+    return g ? g.label : v;
+  }
+ 
   var FASCE = ["19:00 - 21:30", "21:30 - 23:30"];
-
+ 
   function renderPrenotazioniPubbliche(){
     var wrap = document.getElementById("fascePubbliche");
     if(!wrap) return;
     wrap.innerHTML = "";
-    var prenotazioni = loadJSON(LS_PRENOTAZIONI, []);
-
-    FASCE.forEach(function(fascia){
-      var card = document.createElement("div");
-      card.className = "fascia-card";
-      var h3 = document.createElement("h3");
-      h3.textContent = fascia;
-      card.appendChild(h3);
-
-      var elenco = prenotazioni
-        .filter(function(p){ return p.fascia === fascia; })
-        .sort(function(a,b){ return (parseFloat(a.tavoloNumero)||0) - (parseFloat(b.tavoloNumero)||0); });
-
-      if(elenco.length === 0){
-        var empty = document.createElement("div");
-        empty.className = "prenot-pub-empty";
-        empty.textContent = "Nessuna prenotazione ancora per questa fascia.";
-        card.appendChild(empty);
-      }else{
-        var table = document.createElement("table");
-        table.className = "prenot-pub";
-        table.innerHTML = "<thead><tr><th>Tavolo</th><th>Nome e cognome</th></tr></thead>";
-        var tbody = document.createElement("tbody");
-        elenco.forEach(function(p){
-          var tr = document.createElement("tr");
-          tr.innerHTML = "<td>" + escapeHTML(p.tavoloNumero) + "</td><td>" + escapeHTML(p.nome) + " " + escapeHTML(p.cognome) + "</td>";
-          tbody.appendChild(tr);
-        });
-        table.appendChild(tbody);
-        card.appendChild(table);
-      }
-      wrap.appendChild(card);
+    var prenotazioni = loadJSON(LS_PRENOTAZIONI, [])
+      .slice()
+      .sort(function(a,b){
+        var g = (parseFloat(a.giorno)||0) - (parseFloat(b.giorno)||0);
+        if(g !== 0) return g;
+        var f = (a.fascia||"").localeCompare(b.fascia||"");
+        if(f !== 0) return f;
+        return (parseFloat(a.tavoloNumero)||0) - (parseFloat(b.tavoloNumero)||0);
+      });
+ 
+    if(prenotazioni.length === 0){
+      var empty = document.createElement("div");
+      empty.className = "prenot-pub-empty";
+      empty.textContent = "Nessuna prenotazione ancora. Prenota il primo tavolo! 🎉";
+      wrap.appendChild(empty);
+      return;
+    }
+ 
+    var table = document.createElement("table");
+    table.className = "prenot-pub";
+    table.innerHTML = "<thead><tr><th>Giorno</th><th>Fascia</th><th>Tavolo</th><th>Nome e cognome</th></tr></thead>";
+    var tbody = document.createElement("tbody");
+    prenotazioni.forEach(function(p){
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + escapeHTML(giornoLabel(p.giorno)) + "</td>" +
+        "<td>" + escapeHTML(p.fascia) + "</td>" +
+        "<td>" + escapeHTML(p.tavoloNumero) + "</td>" +
+        "<td>" + escapeHTML(p.nome) + " " + escapeHTML(p.cognome) + "</td>";
+      tbody.appendChild(tr);
     });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
   }
-
+ 
   /* ---------- piantina tavoli ---------- */
-  var state = { fascia: null, tavoloSelezionato: null };
-
+  var state = { giorno: null, fascia: null, tavoloSelezionato: null };
+ 
+  function resetBookingUIOnChange(){
+    var bi = document.getElementById("bookingInline");
+    if(bi) bi.style.display = "none";
+    var mp = document.getElementById("miaPrenotInline");
+    if(mp) mp.style.display = "none";
+  }
+ 
+  document.querySelectorAll(".giorno-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll(".giorno-btn").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      state.giorno = btn.getAttribute("data-giorno");
+      resetBookingUIOnChange();
+      renderPiazza();
+    });
+  });
+ 
   document.querySelectorAll(".fascia-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
       document.querySelectorAll(".fascia-btn").forEach(function(b){ b.classList.remove("active"); });
       btn.classList.add("active");
       state.fascia = btn.getAttribute("data-fascia");
-      var bi = document.getElementById("bookingInline");
-      if(bi) bi.style.display = "none";
+      resetBookingUIOnChange();
       renderPiazza();
     });
   });
-
+ 
   var CLOTH_PAIRS = [
     ["#c1442d","#a83a26"],
     ["#5f7c43","#4f6938"],
     ["#2c3260","#242a52"],
     ["#8a5a2e","#734a26"]
   ];
-
+ 
   function renderPiazza(){
     var wrap = document.getElementById("piazzaWrap");
+    var riepilogo = document.getElementById("riepilogoPosti");
     wrap.innerHTML = "";
-
-    if(!state.fascia){
+    if(riepilogo) riepilogo.textContent = "";
+ 
+    if(!state.giorno || !state.fascia){
       var msg = document.createElement("div");
       msg.className = "no-fascia";
-      msg.textContent = "Scegli prima una fascia oraria per vedere la piantina dei tavoli 👆";
+      msg.textContent = "Scegli prima il giorno e la fascia oraria per vedere la piantina dei tavoli 👆";
       wrap.appendChild(msg);
       return;
     }
-
+ 
     var tavoli = loadJSON(LS_TAVOLI, []);
     if(tavoli.length === 0){
       var msg2 = document.createElement("div");
@@ -999,19 +1229,27 @@
       return;
     }
     var prenotazioni = loadJSON(LS_PRENOTAZIONI, []);
+    var prenotazioniSlot = prenotazioni.filter(function(p){ return p.giorno === state.giorno && p.fascia === state.fascia; });
+ 
+    if(riepilogo){
+      var liberi = tavoli.length - prenotazioniSlot.length;
+      var personeTot = prenotazioniSlot.reduce(function(sum,p){ return sum + (parseInt(p.persone,10) || 0); }, 0);
+      riepilogo.innerHTML = "<strong>" + liberi + "</strong> tavoli liberi su <strong>" + tavoli.length + "</strong> · <strong>" + personeTot + "</strong> persone attese";
+    }
+ 
     var piazza = document.createElement("div");
     piazza.className = "piazza";
-
+ 
     tavoli
       .slice()
       .sort(function(a,b){ return (parseFloat(a.numero)||0) - (parseFloat(b.numero)||0); })
       .forEach(function(t, idx){
-        var occupata = prenotazioni.some(function(p){ return p.tavoloId === t.id && p.fascia === state.fascia; });
+        var occupata = prenotazioniSlot.some(function(p){ return p.tavoloId === t.id; });
         var cloth = CLOTH_PAIRS[idx % CLOTH_PAIRS.length];
-
+ 
         var tavWrap = document.createElement("div");
         tavWrap.className = "tavolo-wrap";
-
+ 
         var el = document.createElement("div");
         el.className = "tavolo";
         el.style.setProperty("--cloth-a", cloth[0]);
@@ -1027,7 +1265,7 @@
         el.setAttribute("role","button");
         el.setAttribute("tabindex","0");
         el.setAttribute("aria-label", "Tavolo " + t.numero + (occupata ? ", occupato" : ", libero"));
-
+ 
         (function(tav, isOcc){
           function onActivate(){
             var inline = document.getElementById("bookingInline");
@@ -1041,10 +1279,12 @@
               state.tavoloSelezionato = tav;
               document.getElementById("bookingTitle").textContent = "Prenota il tavolo " + tav.numero;
               document.getElementById("bookingDesc").textContent =
-                (tav.nome ? tav.nome + " · " : "") + "Max " + tav.posti + " posti · Fascia " + state.fascia;
+                (tav.nome ? tav.nome + " · " : "") + "Max " + tav.posti + " posti · " + giornoLabel(state.giorno) + " · Fascia " + state.fascia;
               document.getElementById("bkNome").value = "";
               document.getElementById("bkCognome").value = "";
               document.getElementById("bkTelefono").value = "";
+              document.getElementById("bkPersone").value = "";
+              document.getElementById("bkPersone").setAttribute("max", tav.posti);
               document.getElementById("bookingError").style.display = "none";
               inline.style.display = "block";
               document.getElementById("bookingFormBox").style.display = "block";
@@ -1056,7 +1296,7 @@
             if(e.key === "Enter" || e.key === " "){ e.preventDefault(); onActivate(); }
           });
         })(t, occupata);
-
+ 
         tavWrap.appendChild(el);
         if(t.nome){
           var lbl = document.createElement("div");
@@ -1066,25 +1306,38 @@
         }
         piazza.appendChild(tavWrap);
       });
-
+ 
     wrap.appendChild(piazza);
   }
-
+ 
   /* ---------- form prenotazione ---------- */
   function attemptBooking(){
     var nome = document.getElementById("bkNome").value.trim();
     var cognome = document.getElementById("bkCognome").value.trim();
     var telefono = document.getElementById("bkTelefono").value.trim();
+    var personeStr = document.getElementById("bkPersone").value.trim();
+    var persone = parseInt(personeStr, 10);
     var errEl = document.getElementById("bookingError");
-    if(!nome || !cognome || !telefono){
+    if(!nome || !cognome || !telefono || !personeStr){
       errEl.textContent = "Compila tutti i campi.";
+      errEl.style.display = "block";
+      return;
+    }
+    if(isNaN(persone) || persone < 1){
+      errEl.textContent = "Inserisci un numero di persone valido.";
+      errEl.style.display = "block";
+      return;
+    }
+    var postiMax = parseInt(state.tavoloSelezionato.posti, 10) || 0;
+    if(postiMax && persone > postiMax){
+      errEl.textContent = "Questo tavolo ha al massimo " + postiMax + " posti. Scegli un tavolo più grande o riduci il numero di persone.";
       errEl.style.display = "block";
       return;
     }
     var prenotazioni = loadJSON(LS_PRENOTAZIONI, []);
     // ricontrolla che non sia stato prenotato nel frattempo
     var giaOccupato = prenotazioni.some(function(p){
-      return p.tavoloId === state.tavoloSelezionato.id && p.fascia === state.fascia;
+      return p.tavoloId === state.tavoloSelezionato.id && p.fascia === state.fascia && p.giorno === state.giorno;
     });
     if(giaOccupato){
       errEl.textContent = "Questo tavolo è appena stato prenotato da qualcun altro. Scegline un altro.";
@@ -1096,22 +1349,24 @@
       id: uid(),
       tavoloId: state.tavoloSelezionato.id,
       tavoloNumero: state.tavoloSelezionato.numero,
+      giorno: state.giorno,
       fascia: state.fascia,
       nome: nome,
       cognome: cognome,
       telefono: telefono,
+      persone: persone,
       ts: Date.now()
     });
     saveJSON(LS_PRENOTAZIONI, prenotazioni);
-
+ 
     document.getElementById("bookingFormBox").style.display = "none";
     document.getElementById("bookingSuccessDesc").textContent =
-      "Tavolo " + state.tavoloSelezionato.numero + " · Fascia " + state.fascia + " · " + nome + " " + cognome;
+      "Tavolo " + state.tavoloSelezionato.numero + " · " + giornoLabel(state.giorno) + " · Fascia " + state.fascia + " · " + nome + " " + cognome + " (" + persone + " persone)";
     document.getElementById("bookingSuccessBox").style.display = "block";
     renderPiazza();
     renderPrenotazioniPubbliche();
   }
-
+ 
   document.getElementById("bookingSubmitBtn").addEventListener("click", attemptBooking);
   document.getElementById("bkTelefono").addEventListener("keydown", function(e){
     if(e.key === "Enter"){ e.preventDefault(); attemptBooking(); }
@@ -1125,9 +1380,73 @@
   document.getElementById("bookingOccupiedCloseBtn").addEventListener("click", function(){
     document.getElementById("bookingInline").style.display = "none";
   });
-
+ 
+  /* ---------- ricerca/annulla la propria prenotazione ---------- */
+  document.getElementById("miaPrenotToggle").addEventListener("click", function(){
+    var box = document.getElementById("miaPrenotInline");
+    var isHidden = (box.style.display === "none" || box.style.display === "");
+    document.getElementById("bookingInline").style.display = "none";
+    if(isHidden){
+      box.style.display = "block";
+      document.getElementById("miaPrenotTel").value = "";
+      document.getElementById("miaPrenotRisultati").innerHTML = "";
+      try{ box.scrollIntoView({behavior:"smooth", block:"start"}); }catch(e){}
+    }else{
+      box.style.display = "none";
+    }
+  });
+  document.getElementById("miaPrenotCloseBtn").addEventListener("click", function(){
+    document.getElementById("miaPrenotInline").style.display = "none";
+  });
+ 
+  function cercaMiaPrenotazione(){
+    var tel = document.getElementById("miaPrenotTel").value.trim();
+    var risultati = document.getElementById("miaPrenotRisultati");
+    risultati.innerHTML = "";
+    if(!tel){
+      risultati.innerHTML = "<div class='field-error' style='display:block;'>Inserisci il numero di telefono.</div>";
+      return;
+    }
+    var prenotazioni = loadJSON(LS_PRENOTAZIONI, []).filter(function(p){
+      return p.telefono.replace(/\s+/g,"") === tel.replace(/\s+/g,"");
+    });
+    if(prenotazioni.length === 0){
+      risultati.innerHTML = "<div class='prenot-pub-empty'>Nessuna prenotazione trovata con questo numero.</div>";
+      return;
+    }
+    prenotazioni
+      .sort(function(a,b){ return a.ts - b.ts; })
+      .forEach(function(p){
+        var row = document.createElement("div");
+        row.className = "list-row";
+        var left = document.createElement("div");
+        left.innerHTML = "<strong>Tavolo " + escapeHTML(p.tavoloNumero) + "</strong> <span class='meta'>· " +
+          escapeHTML(giornoLabel(p.giorno)) + " · " + escapeHTML(p.fascia) + " · " + escapeHTML(String(p.persone||"")) + " persone</span>";
+        var del = document.createElement("button");
+        del.className = "btn-danger";
+        del.textContent = "Annulla";
+        del.addEventListener("click", function(){
+          askConfirmInline(del, "Annullare questa prenotazione?", function(){
+            var pr = loadJSON(LS_PRENOTAZIONI, []).filter(function(x){ return x.id !== p.id; });
+            saveJSON(LS_PRENOTAZIONI, pr);
+            renderPiazza();
+            renderPrenotazioniPubbliche();
+            showToast("Prenotazione annullata.");
+            cercaMiaPrenotazione();
+          });
+        });
+        row.appendChild(left);
+        row.appendChild(del);
+        risultati.appendChild(row);
+      });
+  }
+  document.getElementById("miaPrenotCercaBtn").addEventListener("click", cercaMiaPrenotazione);
+  document.getElementById("miaPrenotTel").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); cercaMiaPrenotazione(); }
+  });
+ 
   /* ================= ADMIN ================= */
-
+ 
   var memoryAdminSession = false;
   function isAdminLoggedIn(){
     try{ return sessionStorage.getItem(SS_ADMIN) === "1"; }
@@ -1140,7 +1459,11 @@
     }catch(e){ /* ignore */ }
     memoryAdminSession = val;
   }
-
+ 
+  document.getElementById("refreshPageBtn").addEventListener("click", function(){
+    location.reload();
+  });
+ 
   document.getElementById("openAdminLogin").addEventListener("click", function(){
     var section = document.getElementById("adminInline");
     var isHidden = (section.style.display === "none" || section.style.display === "");
@@ -1159,11 +1482,11 @@
       section.style.display = "none";
     }
   });
-
+ 
   document.getElementById("adminCloseBtn1").addEventListener("click", function(){
     document.getElementById("adminInline").style.display = "none";
   });
-
+ 
   document.getElementById("passToggle").addEventListener("click", function(){
     var input = document.getElementById("adminPass");
     if(input.type === "password"){
@@ -1176,7 +1499,7 @@
       this.setAttribute("aria-label", "Mostra password");
     }
   });
-
+ 
   function attemptLogin(){
     var pass = document.getElementById("adminPass").value.trim();
     var err = document.getElementById("loginError");
@@ -1195,18 +1518,46 @@
       err.style.display = "block";
     }
   }
-
+ 
   document.getElementById("loginSubmitBtn").addEventListener("click", attemptLogin);
   document.getElementById("adminPass").addEventListener("keydown", function(e){
     if(e.key === "Enter"){ e.preventDefault(); attemptLogin(); }
   });
-
+ 
   document.getElementById("adminLogoutBtn").addEventListener("click", function(){
     setAdminLoggedIn(false);
     document.getElementById("adminInline").style.display = "none";
     showToast("Sei uscito dall'area titolare.");
   });
-
+ 
+  document.getElementById("downloadBackupBtn").addEventListener("click", function(){
+    try{
+      var backup = {
+        esportato_il: new Date().toISOString(),
+        sito: "La Sagra di Fellegara",
+        menu: loadJSON(LS_MENU, MENU_EMPTY),
+        tavoli: loadJSON(LS_TAVOLI, []),
+        prenotazioni: loadJSON(LS_PRENOTAZIONI, [])
+      };
+      var testo = JSON.stringify(backup, null, 2);
+      var blob = new Blob([testo], {type: "application/json"});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      var oggi = new Date();
+      var dataFile = oggi.getFullYear() + "-" + String(oggi.getMonth()+1).padStart(2,"0") + "-" + String(oggi.getDate()).padStart(2,"0") + "_" + String(oggi.getHours()).padStart(2,"0") + String(oggi.getMinutes()).padStart(2,"0");
+      a.href = url;
+      a.download = "backup-sagra-fellegara_" + dataFile + ".json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+      showToast("Backup scaricato.");
+    }catch(e){
+      console.error("Errore durante il backup:", e);
+      showToast("Errore durante il backup: " + e.message);
+    }
+  });
+ 
   function openAdminPanel(){
     document.getElementById("adminLoginBox").style.display = "none";
     document.getElementById("adminPanelBox").style.display = "block";
@@ -1214,7 +1565,7 @@
     renderAdminTavoli();
     renderAdminPrenotazioni();
   }
-
+ 
   /* --- admin tabs interni --- */
   document.querySelectorAll(".admin-tab-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
@@ -1225,7 +1576,7 @@
       document.getElementById("admin-" + target).classList.add("active");
     });
   });
-
+ 
   /* --- admin: gestione menu --- */
   function renderAdminMenu(){
     var menu = loadJSON(LS_MENU, MENU_EMPTY);
@@ -1248,23 +1599,73 @@
         row.className = "list-row";
         var left = document.createElement("div");
         left.innerHTML = "<strong>" + escapeHTML(it.nome) + "</strong> <span class='meta'>€ " + escapeHTML(it.prezzo) + "</span>";
+        var btnGroup = document.createElement("div");
+        btnGroup.style.cssText = "display:flex; gap:6px;";
+        var editBtn = document.createElement("button");
+        editBtn.className = "btn-secondary";
+        editBtn.style.cssText = "padding:6px 10px; font-size:.78rem; border-radius:8px;";
+        editBtn.textContent = "Modifica";
         var del = document.createElement("button");
         del.className = "btn-danger";
         del.textContent = "Elimina";
         del.addEventListener("click", function(){
-          var m = loadJSON(LS_MENU, MENU_EMPTY);
-          m[cat] = (m[cat] || []).filter(function(x){ return x.id !== it.id; });
-          saveJSON(LS_MENU, m);
-          renderAdminMenu();
-          renderMenuPublic();
+          askConfirmInline(del, "Eliminare \"" + it.nome + "\" dal menu?", function(){
+            var m = loadJSON(LS_MENU, MENU_EMPTY);
+            m[cat] = (m[cat] || []).filter(function(x){ return x.id !== it.id; });
+            saveJSON(LS_MENU, m);
+            renderAdminMenu();
+            renderMenuPublic();
+          });
         });
+        editBtn.addEventListener("click", function(){
+          if(row.getAttribute("data-editing") === "1") return;
+          row.setAttribute("data-editing", "1");
+          var editRow = document.createElement("div");
+          editRow.className = "edit-row";
+          editRow.innerHTML =
+            "<div class='f'><label>Nome</label><input type='text' class='editNome' value='" + escapeHTML(it.nome) + "'></div>" +
+            "<div class='f' style='max-width:100px;'><label>Prezzo €</label><input type='text' class='editPrezzo' value='" + escapeHTML(it.prezzo) + "'></div>";
+          var saveBtn = document.createElement("button");
+          saveBtn.className = "btn btn-primary";
+          saveBtn.style.cssText = "margin-top:0; width:auto;";
+          saveBtn.textContent = "Salva";
+          var cancelBtn = document.createElement("button");
+          cancelBtn.className = "btn btn-secondary";
+          cancelBtn.style.cssText = "margin-top:0; width:auto;";
+          cancelBtn.textContent = "Annulla";
+          editRow.appendChild(saveBtn);
+          editRow.appendChild(cancelBtn);
+          row.insertAdjacentElement("afterend", editRow);
+          row.style.display = "none";
+          saveBtn.addEventListener("click", function(){
+            var nuovoNome = editRow.querySelector(".editNome").value.trim();
+            var nuovoPrezzo = editRow.querySelector(".editPrezzo").value.trim();
+            if(!nuovoNome || !nuovoPrezzo){
+              showToast("Inserisci nome e prezzo.");
+              return;
+            }
+            var m = loadJSON(LS_MENU, MENU_EMPTY);
+            var target = (m[cat] || []).filter(function(x){ return x.id === it.id; })[0];
+            if(target){ target.nome = nuovoNome; target.prezzo = nuovoPrezzo; }
+            saveJSON(LS_MENU, m);
+            renderAdminMenu();
+            renderMenuPublic();
+          });
+          cancelBtn.addEventListener("click", function(){
+            editRow.remove();
+            row.style.display = "";
+            row.setAttribute("data-editing", "0");
+          });
+        });
+        btnGroup.appendChild(editBtn);
+        btnGroup.appendChild(del);
         row.appendChild(left);
-        row.appendChild(del);
+        row.appendChild(btnGroup);
         list.appendChild(row);
       });
     });
   }
-
+ 
   document.getElementById("addItemBtn").addEventListener("click", function(){
     var cat = document.getElementById("newItemCat").value;
     var nomeEl = document.getElementById("newItemNome");
@@ -1285,7 +1686,7 @@
     renderMenuPublic();
     showToast("Voce aggiunta al menu.");
   });
-
+ 
   /* --- admin: gestione tavoli --- */
   function renderAdminTavoli(){
     var tavoli = loadJSON(LS_TAVOLI, []);
@@ -1308,6 +1709,12 @@
         left.innerHTML = "<strong>Tavolo " + escapeHTML(t.numero) + "</strong> " +
           (t.nome ? "<span class='meta'>· " + escapeHTML(t.nome) + "</span>" : "") +
           " <span class='meta'>· max " + escapeHTML(t.posti) + " posti</span>";
+        var btnGroup = document.createElement("div");
+        btnGroup.style.cssText = "display:flex; gap:6px;";
+        var editBtn = document.createElement("button");
+        editBtn.className = "btn-secondary";
+        editBtn.style.cssText = "padding:6px 10px; font-size:.78rem; border-radius:8px;";
+        editBtn.textContent = "Modifica";
         var del = document.createElement("button");
         del.className = "btn-danger";
         del.textContent = "Elimina";
@@ -1323,12 +1730,61 @@
             renderPrenotazioniPubbliche();
           });
         });
+        editBtn.addEventListener("click", function(){
+          if(row.getAttribute("data-editing") === "1") return;
+          row.setAttribute("data-editing", "1");
+          var editRow = document.createElement("div");
+          editRow.className = "edit-row";
+          editRow.innerHTML =
+            "<div class='f' style='max-width:90px;'><label>N°</label><input type='text' class='editNum' value='" + escapeHTML(t.numero) + "'></div>" +
+            "<div class='f'><label>Nome (opz.)</label><input type='text' class='editNome' value='" + escapeHTML(t.nome||"") + "'></div>" +
+            "<div class='f' style='max-width:90px;'><label>Posti</label><input type='text' class='editPosti' value='" + escapeHTML(t.posti) + "'></div>";
+          var saveBtn = document.createElement("button");
+          saveBtn.className = "btn btn-primary";
+          saveBtn.style.cssText = "margin-top:0; width:auto;";
+          saveBtn.textContent = "Salva";
+          var cancelBtn = document.createElement("button");
+          cancelBtn.className = "btn btn-secondary";
+          cancelBtn.style.cssText = "margin-top:0; width:auto;";
+          cancelBtn.textContent = "Annulla";
+          editRow.appendChild(saveBtn);
+          editRow.appendChild(cancelBtn);
+          row.insertAdjacentElement("afterend", editRow);
+          row.style.display = "none";
+          saveBtn.addEventListener("click", function(){
+            var nuovoNum = editRow.querySelector(".editNum").value.trim();
+            var nuovoNome = editRow.querySelector(".editNome").value.trim();
+            var nuovoPosti = editRow.querySelector(".editPosti").value.trim();
+            if(!nuovoNum || !nuovoPosti){
+              showToast("Inserisci numero e posti.");
+              return;
+            }
+            var tv = loadJSON(LS_TAVOLI, []);
+            var collisione = tv.some(function(x){ return x.id !== t.id && x.numero === nuovoNum; });
+            if(collisione){
+              showToast("Esiste già un altro tavolo con questo numero.");
+              return;
+            }
+            var target = tv.filter(function(x){ return x.id === t.id; })[0];
+            if(target){ target.numero = nuovoNum; target.nome = nuovoNome; target.posti = nuovoPosti; }
+            saveJSON(LS_TAVOLI, tv);
+            renderAdminTavoli();
+            renderPiazza();
+          });
+          cancelBtn.addEventListener("click", function(){
+            editRow.remove();
+            row.style.display = "";
+            row.setAttribute("data-editing", "0");
+          });
+        });
+        btnGroup.appendChild(editBtn);
+        btnGroup.appendChild(del);
         row.appendChild(left);
-        row.appendChild(del);
+        row.appendChild(btnGroup);
         list.appendChild(row);
       });
   }
-
+ 
   document.getElementById("addTavoloBtn").addEventListener("click", function(){
     var numEl = document.getElementById("newTavNum");
     var nomeEl = document.getElementById("newTavNome");
@@ -1352,12 +1808,42 @@
     renderPiazza();
     showToast("Tavolo aggiunto.");
   });
-
+ 
   /* --- admin: elenco prenotazioni --- */
   function renderAdminPrenotazioni(){
-    var prenotazioni = loadJSON(LS_PRENOTAZIONI, []).slice().sort(function(a,b){ return b.ts - a.ts; });
+    var prenotazioniRaw = loadJSON(LS_PRENOTAZIONI, []);
+    var prenotazioni = prenotazioniRaw.slice().sort(function(a,b){ return b.ts - a.ts; });
     var wrap = document.getElementById("adminPrenotList");
     wrap.innerHTML = "";
+ 
+    if(prenotazioniRaw.length > 0){
+      // riepilogo aggregato per giorno + fascia
+      var gruppi = {};
+      prenotazioniRaw.forEach(function(p){
+        var k = p.giorno + "|" + p.fascia;
+        if(!gruppi[k]) gruppi[k] = {giorno:p.giorno, fascia:p.fascia, tavoli:0, persone:0};
+        gruppi[k].tavoli += 1;
+        gruppi[k].persone += (parseInt(p.persone,10) || 0);
+      });
+      var righeRiepilogo = Object.keys(gruppi).map(function(k){ return gruppi[k]; }).sort(function(a,b){
+        var g = (parseFloat(a.giorno)||0) - (parseFloat(b.giorno)||0);
+        if(g !== 0) return g;
+        return (a.fascia||"").localeCompare(b.fascia||"");
+      });
+      var riepTable = document.createElement("table");
+      riepTable.className = "riepilogo";
+      riepTable.innerHTML = "<thead><tr><th>Giorno</th><th>Fascia</th><th>Tavoli</th><th>Persone</th></tr></thead>";
+      var riepBody = document.createElement("tbody");
+      righeRiepilogo.forEach(function(r){
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + escapeHTML(giornoLabel(r.giorno)) + "</td><td>" + escapeHTML(r.fascia) + "</td>" +
+          "<td class='num'>" + r.tavoli + "</td><td class='num'>" + r.persone + "</td>";
+        riepBody.appendChild(tr);
+      });
+      riepTable.appendChild(riepBody);
+      wrap.appendChild(riepTable);
+    }
+ 
     if(prenotazioni.length === 0){
       var e = document.createElement("div");
       e.className = "empty-admin";
@@ -1367,15 +1853,17 @@
     }
     var table = document.createElement("table");
     table.className = "prenot";
-    table.innerHTML = "<thead><tr><th>Tavolo</th><th>Fascia</th><th>Cliente</th><th>Telefono</th><th>Ricevuta il</th><th></th></tr></thead>";
+    table.innerHTML = "<thead><tr><th>Giorno</th><th>Fascia</th><th>Tavolo</th><th>Persone</th><th>Cliente</th><th>Telefono</th><th>Ricevuta il</th><th></th></tr></thead>";
     var tbody = document.createElement("tbody");
     prenotazioni.forEach(function(p){
       var tr = document.createElement("tr");
       var data = new Date(p.ts);
       var dataStr = data.toLocaleDateString("it-IT") + " " + data.toLocaleTimeString("it-IT", {hour:"2-digit", minute:"2-digit"});
       tr.innerHTML =
-        "<td>" + escapeHTML(p.tavoloNumero) + "</td>" +
+        "<td>" + escapeHTML(giornoLabel(p.giorno)) + "</td>" +
         "<td>" + escapeHTML(p.fascia) + "</td>" +
+        "<td>" + escapeHTML(p.tavoloNumero) + "</td>" +
+        "<td>" + escapeHTML(String(p.persone||"")) + "</td>" +
         "<td>" + escapeHTML(p.nome) + " " + escapeHTML(p.cognome) + "</td>" +
         "<td>" + escapeHTML(p.telefono) + "</td>" +
         "<td>" + dataStr + "</td>";
@@ -1399,7 +1887,7 @@
     table.appendChild(tbody);
     wrap.appendChild(table);
   }
-
+ 
   /* conferma inline al posto del confirm() nativo, spesso bloccato nei browser integrati (es. app di messaggistica) */
   function askConfirmInline(btn, message, onYes){
     if(btn.getAttribute("data-confirming") === "1") return;
@@ -1433,7 +1921,7 @@
       btn.setAttribute("data-confirming", "0");
     });
   }
-
+ 
   function escapeHTML(str){
     return String(str)
       .replace(/&/g,"&amp;")
@@ -1441,13 +1929,15 @@
       .replace(/>/g,"&gt;")
       .replace(/"/g,"&quot;");
   }
-
+ 
   /* ---------- init ---------- */
   renderMenuPublic();
   renderPrenotazioniPubbliche();
   renderPiazza();
-
+  initFirebaseSync();
+ 
 })();
 </script>
 </body>
 </html>
+ 

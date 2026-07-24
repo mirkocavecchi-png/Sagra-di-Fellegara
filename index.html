@@ -70,7 +70,7 @@
   @media (prefers-reduced-motion: reduce){
     .bulb{animation:none;}
   }
- 
+
   /* ---------- header ---------- */
   header{
     text-align:center;
@@ -132,14 +132,25 @@
   .admin-btn:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{
     outline:2px solid var(--gold); outline-offset:2px;
   }
- 
+
   /* ---------- nav tabs ---------- */
   nav.tabs{
     display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    padding:4px 16px 8px;
+  }
+  .tabs-row{
+    display:flex;
     justify-content:center;
     gap:8px;
-    padding:4px 16px 8px;
     flex-wrap:wrap;
+  }
+  .social-row{
+    display:flex;
+    justify-content:center;
+    gap:10px;
   }
   .tab-btn{
     font-family:'Inter',sans-serif;
@@ -160,7 +171,7 @@
     box-shadow:0 4px 18px rgba(242,181,68,.35);
   }
   .tab-btn:not(.active):hover{background:rgba(244,233,208,.1);}
- 
+
   .ig-btn{
     display:inline-flex;
     align-items:center;
@@ -183,12 +194,12 @@
     border-color:transparent;
     transform:translateY(-1px);
   }
- 
+
   main{max-width:960px; margin:0 auto; padding:10px 18px 70px;}
   section.view{display:none;}
   section.view.active{display:block; animation:fadeIn .35s ease;}
   @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
- 
+
   /* ---------- menu ---------- */
   .menu-grid{
     display:grid;
@@ -246,7 +257,7 @@
     color:var(--gold);
     white-space:nowrap;
   }
- 
+
   /* ---------- piantina ---------- */
   .fascia-picker{
     display:flex;
@@ -273,7 +284,7 @@
     box-shadow:0 4px 18px rgba(193,68,45,.4);
   }
   .fascia-btn:hover:not(.active){background:rgba(244,233,208,.12);}
- 
+
   .giorno-picker{
     display:flex;
     gap:8px;
@@ -300,7 +311,7 @@
     box-shadow:0 4px 18px rgba(127,179,86,.35);
   }
   .giorno-btn:hover:not(.active){background:rgba(244,233,208,.12);}
- 
+
   .riepilogo-posti{
     text-align:center;
     font-size:.85rem;
@@ -308,7 +319,7 @@
     margin:14px 0 0;
   }
   .riepilogo-posti strong{color:var(--gold-soft);}
- 
+
   .mia-prenot-toggle{
     display:block;
     text-align:center;
@@ -320,7 +331,7 @@
     text-decoration:underline;
     cursor:pointer;
   }
- 
+
   .edit-row{
     display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;
     background:rgba(244,233,208,.06);
@@ -330,7 +341,7 @@
   }
   .edit-row .f{flex:1; min-width:100px;}
   .edit-row label{margin:0 0 4px; font-size:.72rem;}
- 
+
   .legend{
     display:flex;
     justify-content:center;
@@ -343,7 +354,7 @@
   .dot{width:12px; height:12px; border-radius:50%; display:inline-block;}
   .dot.libero{background:var(--olive-bright); box-shadow:0 0 8px rgba(127,179,86,.7);}
   .dot.occupato{background:var(--red-occ); box-shadow:0 0 8px rgba(193,68,45,.7);}
- 
+
   .piazza{
     margin-top:22px;
     background:
@@ -405,7 +416,7 @@
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   .tavolo-wrap{display:flex; flex-direction:column; align-items:center;}
- 
+
   /* ---------- modali ---------- */
   .overlay{
     position:fixed; inset:0;
@@ -491,7 +502,7 @@
     opacity:.75;
   }
   .pass-toggle:hover{opacity:1;}
- 
+
   .field-error{color:var(--red-occ); font-size:.78rem; margin-top:6px; display:none;}
   .info-box{
     background:rgba(244,233,208,.06);
@@ -516,7 +527,7 @@
     box-shadow:0 8px 24px rgba(0,0,0,.35);
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
- 
+
   /* ---------- prenotazioni pubbliche ---------- */
   .prenot-pubbliche{margin-top:34px;}
   .prenot-pubbliche-title{
@@ -552,7 +563,7 @@
   table.prenot-pub th, table.prenot-pub td{text-align:left; padding:7px 6px; border-bottom:1px solid rgba(244,233,208,.1);}
   table.prenot-pub th{color:var(--gold-soft); font-size:.68rem; text-transform:uppercase; letter-spacing:.04em;}
   .prenot-pub-empty{color:#9a94bd; font-family:'Caveat',cursive; font-size:1.1rem; padding:4px 0;}
- 
+
   /* ---------- admin inline (non più overlay, per compatibilità) ---------- */
   .admin-inline{
     margin:14px 0 30px;
@@ -572,7 +583,7 @@
     color:var(--gold-soft);
   }
   .admin-box p.desc{color:#c9c3e6; font-size:.88rem; margin:0 0 14px;}
- 
+
   /* ---------- admin panel ---------- */
   .admin-tabs{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;}
   .admin-tab-btn{
@@ -600,7 +611,7 @@
   }
   .list-row:last-child{border-bottom:none;}
   .list-row .meta{color:#c9c3e6; font-size:.78rem;}
-  table.prenot{width:100%; border-collapse:collapse; font-size:.82rem;}
+  table.prenot{width:100%; min-width:640px; border-collapse:collapse; font-size:.82rem;}
   table.prenot th, table.prenot td{text-align:left; padding:8px 6px; border-bottom:1px solid rgba(244,233,208,.1);}
   table.prenot th{color:var(--gold-soft); font-size:.72rem; text-transform:uppercase; letter-spacing:.04em;}
   .empty-admin{color:#9a94bd; font-family:'Caveat',cursive; font-size:1.1rem; padding:10px 0;}
@@ -619,50 +630,162 @@
     font-size:.85rem;
   }
   .backup-box p.meta{color:#c9c3e6; font-size:.78rem;}
- 
+
   table.riepilogo{width:100%; border-collapse:collapse; font-size:.82rem; margin-bottom:20px;}
   table.riepilogo th, table.riepilogo td{text-align:left; padding:7px 6px; border-bottom:1px solid rgba(244,233,208,.1);}
   table.riepilogo th{color:var(--gold-soft); font-size:.68rem; text-transform:uppercase; letter-spacing:.04em;}
   table.riepilogo td.num{font-family:'Space Mono', monospace;}
- 
+
+  /* ---------- bandierine (bunting) ---------- */
+  .bunting{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    gap:4px;
+    height:20px;
+    margin:16px auto 2px;
+    max-width:420px;
+  }
+  .bunting::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:2px;
+    background:rgba(244,233,208,.3);
+  }
+  .bunting .flag{
+    width:13px;
+    height:17px;
+    margin-top:2px;
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+  }
+  .bunting .flag:nth-child(4n+1){background:var(--brick);}
+  .bunting .flag:nth-child(4n+2){background:var(--gold);}
+  .bunting .flag:nth-child(4n+3){background:var(--olive-bright);}
+  .bunting .flag:nth-child(4n){background:var(--cream);}
+
+  /* ---------- colori per categoria menu ---------- */
+  .menu-card{border-top:4px solid var(--cat-color, var(--gold));}
+  .menu-card h3{color:var(--cat-color, var(--gold-soft));}
+
+  /* ---------- biglietto di conferma prenotazione ---------- */
+  .ticket{
+    background:linear-gradient(180deg,#242a52,#1b1f3f);
+    border:1px solid rgba(244,233,208,.15);
+    border-radius:18px;
+    max-width:420px;
+    margin:0 auto;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+  }
+  .ticket-main{padding:24px 22px 18px; text-align:center;}
+  .ticket-eyebrow{
+    font-family:'Caveat', cursive;
+    font-size:1.15rem;
+    color:var(--gold-soft);
+    margin-bottom:2px;
+  }
+  .ticket-main h2{
+    font-family:'Fraunces', serif;
+    font-size:1.3rem;
+    margin:0 0 16px;
+    color:var(--cream);
+  }
+  .ticket-details{
+    text-align:left;
+    font-family:'Space Mono', monospace;
+    font-size:.85rem;
+  }
+  .ticket-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:6px 0;
+    border-bottom:1px dashed rgba(244,233,208,.15);
+    color:#c9c3e6;
+  }
+  .ticket-row:last-child{border-bottom:none;}
+  .ticket-row strong{color:var(--gold-soft); font-weight:700;}
+  .ticket-divider{
+    position:relative;
+    height:0;
+    border-top:2px dashed rgba(244,233,208,.25);
+    margin:0 0;
+  }
+  .ticket-divider::before, .ticket-divider::after{
+    content:"";
+    position:absolute;
+    top:-10px;
+    width:20px; height:20px;
+    border-radius:50%;
+    background:var(--dusk-900);
+  }
+  .ticket-divider::before{left:-10px;}
+  .ticket-divider::after{right:-10px;}
+  .ticket-stub{
+    padding:14px 22px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .ticket-stripes{
+    flex:1;
+    height:22px;
+    background:repeating-linear-gradient(90deg, rgba(244,233,208,.35) 0 3px, transparent 3px 7px);
+    border-radius:3px;
+  }
+  .ticket-code{
+    font-family:'Space Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:.06em;
+    color:var(--gold-soft);
+    white-space:nowrap;
+  }
+
   footer{text-align:center; padding:24px; color:#6b6693; font-size:.78rem;}
 </style>
 </head>
 <body>
- 
+
 <div class="lights-strip" id="lightsStrip"></div>
- 
+
 <header>
   <div class="eyebrow">1 – 5 agosto · Via della Botte, 7, Fellegara</div>
   <h1 class="title">La Sagra di Fellegara</h1>
   <p class="subtitle">Musica, buon cibo, amici e tanto divertimento. Sfoglia il menu e prenota il tuo tavolo.</p>
+  <div class="bunting" id="buntingRow"></div>
   <button class="admin-btn" id="openAdminLogin">🔒 Area titolare</button>
   <br>
   <button class="refresh-link" id="refreshPageBtn">🔄 Aggiorna la pagina</button>
 </header>
- 
+
 <nav class="tabs">
-  <button class="tab-btn active" data-view="menu">🍝 Menu</button>
-  <button class="tab-btn" data-view="piantina">🪑 Prenota un tavolo</button>
-  <a class="ig-btn" href="https://www.instagram.com/nuovafellegara" target="_blank" rel="noopener noreferrer" aria-label="Seguici su Instagram @nuovafellegara" title="Seguici su Instagram @nuovafellegara">
-    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5.5"></rect>
-      <circle cx="12" cy="12" r="4.2"></circle>
-      <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle>
-    </svg>
-  </a>
-  <a class="ig-btn wa-btn" href="https://wa.me/393497225376" target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp" title="Scrivici su WhatsApp">
-    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
-      <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.24 8.24 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.55 3.7-8.25 8.26-8.25 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.84c0 4.55-3.71 8.23-8.26 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.13.17 1.73 2.64 4.2 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/>
-    </svg>
-  </a>
+  <div class="tabs-row">
+    <button class="tab-btn active" data-view="menu">🍝 Menu</button>
+    <button class="tab-btn" data-view="piantina">🪑 Prenota un tavolo</button>
+  </div>
+  <div class="social-row">
+    <a class="ig-btn" href="https://www.instagram.com/nuovafellegara" target="_blank" rel="noopener noreferrer" aria-label="Seguici su Instagram @nuovafellegara" title="Seguici su Instagram @nuovafellegara">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5.5"></rect>
+        <circle cx="12" cy="12" r="4.2"></circle>
+        <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+    <a class="ig-btn wa-btn" href="https://wa.me/393497225376" target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp" title="Scrivici su WhatsApp">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+        <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.24 8.24 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.55 3.7-8.25 8.26-8.25 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.84c0 4.55-3.71 8.23-8.26 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.13.17 1.73 2.64 4.2 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/>
+      </svg>
+    </a>
+  </div>
 </nav>
- 
+
 <main>
- 
+
   <!-- AREA TITOLARE (inline, non in overlay, per massima compatibilità) -->
   <section class="admin-inline" id="adminInline" style="display:none;">
- 
+
     <!-- login -->
     <div id="adminLoginBox" class="admin-box">
       <h2>Area titolare</h2>
@@ -676,18 +799,18 @@
       <button type="button" class="btn btn-primary" id="loginSubmitBtn">Entra</button>
       <button type="button" class="btn btn-secondary" style="width:100%; margin-top:8px;" id="adminCloseBtn1">Chiudi</button>
     </div>
- 
+
     <!-- pannello vero e proprio -->
     <div id="adminPanelBox" class="admin-box" style="display:none;">
       <h2>Pannello titolare</h2>
       <p class="desc">Gestisci menu, tavoli e le prenotazioni ricevute.</p>
- 
+
       <div class="admin-tabs">
         <button class="admin-tab-btn active" data-admin="menu">Menu</button>
         <button class="admin-tab-btn" data-admin="tavoli">Tavoli</button>
         <button class="admin-tab-btn" data-admin="prenotazioni">Prenotazioni</button>
       </div>
- 
+
       <!-- ADMIN: MENU -->
       <div class="admin-section active" id="admin-menu">
         <div class="add-form" id="addMenuForm">
@@ -713,7 +836,7 @@
         </div>
         <div id="adminMenuList"></div>
       </div>
- 
+
       <!-- ADMIN: TAVOLI -->
       <div class="admin-section" id="admin-tavoli">
         <div class="add-form" id="addTavoloForm">
@@ -733,12 +856,12 @@
         </div>
         <div id="adminTavoliList"></div>
       </div>
- 
+
       <!-- ADMIN: PRENOTAZIONI -->
       <div class="admin-section" id="admin-prenotazioni">
-        <div id="adminPrenotList"></div>
+        <div id="adminPrenotList" style="overflow-x:auto; -webkit-overflow-scrolling:touch;"></div>
       </div>
- 
+
       <div class="backup-box">
         <div>
           <strong>Backup dati</strong>
@@ -746,24 +869,24 @@
         </div>
         <button class="btn btn-secondary" id="downloadBackupBtn">⬇️ Scarica backup</button>
       </div>
- 
+
       <div class="logout-row">
         <button class="btn btn-secondary" id="adminLogoutBtn">Esci dall'area titolare</button>
       </div>
     </div>
- 
+
   </section>
- 
+
   <!-- MENU -->
   <section class="view active" id="view-menu">
     <div class="menu-grid" id="menuGrid"></div>
- 
+
     <div class="prenot-pubbliche">
       <h2 class="prenot-pubbliche-title">Chi ha già prenotato</h2>
       <div class="fasce-pubbliche" id="fascePubbliche"></div>
     </div>
   </section>
- 
+
   <!-- PIANTINA -->
   <section class="view" id="view-piantina">
     <div class="giorno-picker" id="giornoPicker">
@@ -783,9 +906,9 @@
     </div>
     <div class="riepilogo-posti" id="riepilogoPosti"></div>
     <div id="piazzaWrap"></div>
- 
+
     <button type="button" class="mia-prenot-toggle" id="miaPrenotToggle">🔍 Hai già prenotato? Cerca o annulla la tua prenotazione</button>
- 
+
     <div id="miaPrenotInline" style="display:none;">
       <div class="admin-box" id="miaPrenotBox">
         <h2>La tua prenotazione</h2>
@@ -797,9 +920,9 @@
         <div id="miaPrenotRisultati" style="margin-top:14px;"></div>
       </div>
     </div>
- 
+
     <div id="bookingInline" style="display:none;">
- 
+
       <!-- form prenotazione -->
       <div id="bookingFormBox" class="admin-box">
         <h2 id="bookingTitle">Prenota il tavolo</h2>
@@ -816,49 +939,66 @@
         <button type="button" class="btn btn-primary" id="bookingSubmitBtn">Conferma prenotazione</button>
         <button type="button" class="btn btn-secondary" style="width:100%; margin-top:8px;" id="bookingCancelBtn">Annulla</button>
       </div>
- 
-      <!-- messaggio di successo -->
-      <div id="bookingSuccessBox" class="admin-box" style="display:none; text-align:center;">
-        <h2>Grazie per la tua prenotazione! 🎉</h2>
-        <p class="desc" id="bookingSuccessDesc"></p>
-        <button type="button" class="btn btn-primary" id="bookingSuccessCloseBtn">Torna alla piantina</button>
+
+      <!-- messaggio di successo: biglietto -->
+      <div id="bookingSuccessBox" style="display:none;">
+        <div class="ticket">
+          <div class="ticket-main">
+            <div class="ticket-eyebrow">La Sagra di Fellegara</div>
+            <h2>Prenotazione confermata 🎉</h2>
+            <div class="ticket-details">
+              <div class="ticket-row"><span>Tavolo</span><strong id="ticketTavolo"></strong></div>
+              <div class="ticket-row"><span>Giorno</span><strong id="ticketGiorno"></strong></div>
+              <div class="ticket-row"><span>Fascia</span><strong id="ticketFascia"></strong></div>
+              <div class="ticket-row"><span>Nome</span><strong id="ticketNome"></strong></div>
+              <div class="ticket-row"><span>Persone</span><strong id="ticketPersone"></strong></div>
+            </div>
+          </div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-stub">
+            <div class="ticket-stripes"></div>
+            <div class="ticket-code" id="ticketCode"></div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary" style="max-width:420px; margin:12px auto 0; display:block; width:100%;" id="addToCalendarBtn">📅 Aggiungi al calendario</button>
+        <button type="button" class="btn btn-primary" style="max-width:420px; margin:10px auto 0; display:block;" id="bookingSuccessCloseBtn">Torna alla piantina</button>
       </div>
- 
+
       <!-- tavolo occupato -->
       <div id="bookingOccupiedBox" class="admin-box" style="display:none; text-align:center;">
         <h2>Tavolo occupato</h2>
         <p class="desc">Questo tavolo è già stato prenotato per questo giorno e fascia oraria. Scegli un tavolo verde oppure prova un altro giorno/fascia.</p>
         <button type="button" class="btn btn-secondary" style="width:100%" id="bookingOccupiedCloseBtn">Ho capito</button>
       </div>
- 
+
     </div>
   </section>
- 
+
 </main>
- 
-<footer>La Sagra di Fellegara · <span id="versionTag">v14</span></footer>
- 
+
+<footer>La Sagra di Fellegara · <span id="versionTag">v18</span></footer>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
- 
+
 <!-- Firebase: usato SOLO se configuri le credenziali qui sotto in FIREBASE_CONFIG. Se non lo fai, il sito funziona comunque normalmente con il salvataggio nel browser (localStorage), device per device. -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
- 
+
 <script>
 (function(){
   "use strict";
- 
+
   window.addEventListener("error", function(e){
     console.error("Errore JS:", e.message, e.filename, e.lineno);
   });
- 
+
   var ADMIN_PASSWORD = "Fellegara26";
   var LS_MENU = "sagra_menu";
   var LS_TAVOLI = "sagra_tavoli";
   var LS_PRENOTAZIONI = "sagra_prenotazioni";
   var SS_ADMIN = "sagra_admin_session";
- 
+
   /* ---------- utilità storage (con fallback in memoria se localStorage è bloccato, es. file://) ---------- */
   var memoryStore = {};
   var storageBlocked = false;
@@ -870,7 +1010,7 @@
     storageBlocked = true;
     console.warn("localStorage non disponibile in questo contesto (probabilmente apertura diretta del file). Uso una memoria temporanea: i dati non verranno salvati ricaricando la pagina.");
   }
- 
+
   function loadJSON(key, fallback){
     try{
       if(storageBlocked){
@@ -898,7 +1038,7 @@
       });
     }
   }
- 
+
   /* ---------- sincronizzazione multi-dispositivo con Firebase (opzionale) -----------
      Per attivarla:
      1. Vai su https://console.firebase.google.com e crea un progetto gratuito
@@ -918,7 +1058,7 @@
   };
   var firebaseEnabled = false;
   var firebaseDb = null;
- 
+
   function subscribeFirestore(key, onChange){
     firebaseDb.collection("sagra_fellegara").doc(key).onSnapshot(function(snap){
       if(snap.exists){
@@ -939,7 +1079,7 @@
       console.error("Errore sincronizzazione Firebase (" + key + "):", err);
     });
   }
- 
+
   function initFirebaseSync(){
     if(FIREBASE_CONFIG.apiKey === "INSERISCI_QUI") return;
     if(typeof firebase === "undefined"){
@@ -961,13 +1101,21 @@
   function uid(){
     return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
   }
- 
+
+  var LS_ULTIMO_TEL = "sagra_ultimo_telefono";
+  function salvaTelefonoLocale(tel){
+    try{ localStorage.setItem(LS_ULTIMO_TEL, tel); }catch(e){ /* ignore */ }
+  }
+  function leggiTelefonoLocale(){
+    try{ return localStorage.getItem(LS_ULTIMO_TEL) || ""; }catch(e){ return ""; }
+  }
+
   /* ---------- dati iniziali (seed di esempio, modificabili dall'admin) ---------- */
   function hasKey(key){
     if(storageBlocked) return (key in memoryStore);
     try{ return localStorage.getItem(key) !== null; }catch(e){ return false; }
   }
- 
+
   function seedIfEmpty(){
     if(!hasKey(LS_MENU)){
       saveJSON(LS_MENU, {
@@ -1022,7 +1170,7 @@
   function MENU_EMPTY_FALLBACK(){ return {bevande:[], primi:[], secondi:[], contorni:[], dolci:[]}; }
   function MENU_EMPTY_FALLBACK_KEYS(){ return ["bevande","primi","secondi","contorni","dolci"]; }
   seedIfEmpty();
- 
+
   /* ---------- lucine ---------- */
   var lightsStrip = document.getElementById("lightsStrip");
   for(var i=0;i<26;i++){
@@ -1030,7 +1178,17 @@
     b.className = "bulb";
     lightsStrip.appendChild(b);
   }
- 
+
+  /* ---------- bandierine ---------- */
+  var buntingRow = document.getElementById("buntingRow");
+  if(buntingRow){
+    for(var bf=0; bf<13; bf++){
+      var flag = document.createElement("div");
+      flag.className = "flag";
+      buntingRow.appendChild(flag);
+    }
+  }
+
   /* ---------- toast ---------- */
   var toastEl = document.getElementById("toast");
   var toastTimer = null;
@@ -1040,7 +1198,7 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 2600);
   }
- 
+
   /* ---------- overlay helpers ---------- */
   function openOverlay(id){ document.getElementById(id).classList.add("open"); }
   function closeOverlay(id){ document.getElementById(id).classList.remove("open"); }
@@ -1055,7 +1213,7 @@
       document.querySelectorAll(".overlay.open").forEach(function(ov){ ov.classList.remove("open"); });
     }
   });
- 
+
   /* ---------- nav tabs ---------- */
   document.querySelectorAll(".tab-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
@@ -1066,18 +1224,18 @@
       document.getElementById("view-" + view).classList.add("active");
     });
   });
- 
+
   /* ---------- render MENU pubblico ---------- */
   var MENU_CATS = ["bevande","primi","secondi","contorni","dolci"];
   var CAT_META = {
-    bevande: {label: "Bevande", icon: "🥂"},
-    primi: {label: "Primi piatti", icon: "🍝"},
-    secondi: {label: "Secondi piatti", icon: "🍖"},
-    contorni: {label: "Contorni", icon: "🥗"},
-    dolci: {label: "Dolci", icon: "🍰"}
+    bevande: {label: "Bevande", icon: "🥂", color: "#f2b544"},
+    primi: {label: "Primi piatti", icon: "🍝", color: "#c1442d"},
+    secondi: {label: "Secondi piatti", icon: "🍖", color: "#7fb356"},
+    contorni: {label: "Contorni", icon: "🥗", color: "#4fae8a"},
+    dolci: {label: "Dolci", icon: "🍰", color: "#d9769a"}
   };
   var MENU_EMPTY = {bevande:[], primi:[], secondi:[], contorni:[], dolci:[]};
- 
+
   function renderMenuPublic(){
     var menu = loadJSON(LS_MENU, MENU_EMPTY);
     var grid = document.getElementById("menuGrid");
@@ -1085,6 +1243,7 @@
     MENU_CATS.forEach(function(cat){
       var card = document.createElement("div");
       card.className = "menu-card";
+      card.style.setProperty("--cat-color", CAT_META[cat].color);
       var h3 = document.createElement("h3");
       h3.innerHTML = '<span class="cat-icon">' + CAT_META[cat].icon + '</span>' + CAT_META[cat].label;
       card.appendChild(h3);
@@ -1115,7 +1274,7 @@
       grid.appendChild(card);
     });
   }
- 
+
   var GIORNI = [
     {value:"1", label:"1 agosto"},
     {value:"2", label:"2 agosto"},
@@ -1127,9 +1286,9 @@
     var g = GIORNI.filter(function(x){ return x.value === v; })[0];
     return g ? g.label : v;
   }
- 
+
   var FASCE = ["19:00 - 21:30", "21:30 - 23:30"];
- 
+
   function renderPrenotazioniPubbliche(){
     var wrap = document.getElementById("fascePubbliche");
     if(!wrap) return;
@@ -1143,7 +1302,7 @@
         if(f !== 0) return f;
         return (parseFloat(a.tavoloNumero)||0) - (parseFloat(b.tavoloNumero)||0);
       });
- 
+
     if(prenotazioni.length === 0){
       var empty = document.createElement("div");
       empty.className = "prenot-pub-empty";
@@ -1151,7 +1310,7 @@
       wrap.appendChild(empty);
       return;
     }
- 
+
     var table = document.createElement("table");
     table.className = "prenot-pub";
     table.innerHTML = "<thead><tr><th>Giorno</th><th>Fascia</th><th>Tavolo</th><th>Nome e cognome</th></tr></thead>";
@@ -1168,17 +1327,17 @@
     table.appendChild(tbody);
     wrap.appendChild(table);
   }
- 
+
   /* ---------- piantina tavoli ---------- */
-  var state = { giorno: null, fascia: null, tavoloSelezionato: null };
- 
+  var state = { giorno: null, fascia: null, tavoloSelezionato: null, ultimaPrenotazione: null };
+
   function resetBookingUIOnChange(){
     var bi = document.getElementById("bookingInline");
     if(bi) bi.style.display = "none";
     var mp = document.getElementById("miaPrenotInline");
     if(mp) mp.style.display = "none";
   }
- 
+
   document.querySelectorAll(".giorno-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
       document.querySelectorAll(".giorno-btn").forEach(function(b){ b.classList.remove("active"); });
@@ -1188,7 +1347,7 @@
       renderPiazza();
     });
   });
- 
+
   document.querySelectorAll(".fascia-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
       document.querySelectorAll(".fascia-btn").forEach(function(b){ b.classList.remove("active"); });
@@ -1198,20 +1357,20 @@
       renderPiazza();
     });
   });
- 
+
   var CLOTH_PAIRS = [
     ["#c1442d","#a83a26"],
     ["#5f7c43","#4f6938"],
     ["#2c3260","#242a52"],
     ["#8a5a2e","#734a26"]
   ];
- 
+
   function renderPiazza(){
     var wrap = document.getElementById("piazzaWrap");
     var riepilogo = document.getElementById("riepilogoPosti");
     wrap.innerHTML = "";
     if(riepilogo) riepilogo.textContent = "";
- 
+
     if(!state.giorno || !state.fascia){
       var msg = document.createElement("div");
       msg.className = "no-fascia";
@@ -1219,7 +1378,7 @@
       wrap.appendChild(msg);
       return;
     }
- 
+
     var tavoli = loadJSON(LS_TAVOLI, []);
     if(tavoli.length === 0){
       var msg2 = document.createElement("div");
@@ -1230,26 +1389,26 @@
     }
     var prenotazioni = loadJSON(LS_PRENOTAZIONI, []);
     var prenotazioniSlot = prenotazioni.filter(function(p){ return p.giorno === state.giorno && p.fascia === state.fascia; });
- 
+
     if(riepilogo){
       var liberi = tavoli.length - prenotazioniSlot.length;
       var personeTot = prenotazioniSlot.reduce(function(sum,p){ return sum + (parseInt(p.persone,10) || 0); }, 0);
       riepilogo.innerHTML = "<strong>" + liberi + "</strong> tavoli liberi su <strong>" + tavoli.length + "</strong> · <strong>" + personeTot + "</strong> persone attese";
     }
- 
+
     var piazza = document.createElement("div");
     piazza.className = "piazza";
- 
+
     tavoli
       .slice()
       .sort(function(a,b){ return (parseFloat(a.numero)||0) - (parseFloat(b.numero)||0); })
       .forEach(function(t, idx){
         var occupata = prenotazioniSlot.some(function(p){ return p.tavoloId === t.id; });
         var cloth = CLOTH_PAIRS[idx % CLOTH_PAIRS.length];
- 
+
         var tavWrap = document.createElement("div");
         tavWrap.className = "tavolo-wrap";
- 
+
         var el = document.createElement("div");
         el.className = "tavolo";
         el.style.setProperty("--cloth-a", cloth[0]);
@@ -1265,7 +1424,7 @@
         el.setAttribute("role","button");
         el.setAttribute("tabindex","0");
         el.setAttribute("aria-label", "Tavolo " + t.numero + (occupata ? ", occupato" : ", libero"));
- 
+
         (function(tav, isOcc){
           function onActivate(){
             var inline = document.getElementById("bookingInline");
@@ -1282,7 +1441,7 @@
                 (tav.nome ? tav.nome + " · " : "") + "Max " + tav.posti + " posti · " + giornoLabel(state.giorno) + " · Fascia " + state.fascia;
               document.getElementById("bkNome").value = "";
               document.getElementById("bkCognome").value = "";
-              document.getElementById("bkTelefono").value = "";
+              document.getElementById("bkTelefono").value = leggiTelefonoLocale();
               document.getElementById("bkPersone").value = "";
               document.getElementById("bkPersone").setAttribute("max", tav.posti);
               document.getElementById("bookingError").style.display = "none";
@@ -1296,7 +1455,7 @@
             if(e.key === "Enter" || e.key === " "){ e.preventDefault(); onActivate(); }
           });
         })(t, occupata);
- 
+
         tavWrap.appendChild(el);
         if(t.nome){
           var lbl = document.createElement("div");
@@ -1306,20 +1465,33 @@
         }
         piazza.appendChild(tavWrap);
       });
- 
+
     wrap.appendChild(piazza);
   }
- 
+
   /* ---------- form prenotazione ---------- */
+  function isTelefonoValido(tel){
+    var pulito = tel.replace(/[\s\-\/]/g,"");
+    return /^\+?[0-9]{6,15}$/.test(pulito);
+  }
+
+  var bookingSubmitting = false;
   function attemptBooking(){
+    if(bookingSubmitting) return;
     var nome = document.getElementById("bkNome").value.trim();
     var cognome = document.getElementById("bkCognome").value.trim();
     var telefono = document.getElementById("bkTelefono").value.trim();
     var personeStr = document.getElementById("bkPersone").value.trim();
     var persone = parseInt(personeStr, 10);
     var errEl = document.getElementById("bookingError");
+    var submitBtn = document.getElementById("bookingSubmitBtn");
     if(!nome || !cognome || !telefono || !personeStr){
       errEl.textContent = "Compila tutti i campi.";
+      errEl.style.display = "block";
+      return;
+    }
+    if(!isTelefonoValido(telefono)){
+      errEl.textContent = "Inserisci un numero di telefono valido (solo cifre, es. 333 1234567).";
       errEl.style.display = "block";
       return;
     }
@@ -1334,6 +1506,11 @@
       errEl.style.display = "block";
       return;
     }
+
+    bookingSubmitting = true;
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = ".6";
+
     var prenotazioni = loadJSON(LS_PRENOTAZIONI, []);
     // ricontrolla che non sia stato prenotato nel frattempo
     var giaOccupato = prenotazioni.some(function(p){
@@ -1343,9 +1520,12 @@
       errEl.textContent = "Questo tavolo è appena stato prenotato da qualcun altro. Scegline un altro.";
       errEl.style.display = "block";
       renderPiazza();
+      bookingSubmitting = false;
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "";
       return;
     }
-    prenotazioni.push({
+    var nuovaPrenotazione = {
       id: uid(),
       tavoloId: state.tavoloSelezionato.id,
       tavoloNumero: state.tavoloSelezionato.numero,
@@ -1356,17 +1536,27 @@
       telefono: telefono,
       persone: persone,
       ts: Date.now()
-    });
+    };
+    prenotazioni.push(nuovaPrenotazione);
     saveJSON(LS_PRENOTAZIONI, prenotazioni);
- 
+    salvaTelefonoLocale(telefono);
+
     document.getElementById("bookingFormBox").style.display = "none";
-    document.getElementById("bookingSuccessDesc").textContent =
-      "Tavolo " + state.tavoloSelezionato.numero + " · " + giornoLabel(state.giorno) + " · Fascia " + state.fascia + " · " + nome + " " + cognome + " (" + persone + " persone)";
+    document.getElementById("ticketTavolo").textContent = state.tavoloSelezionato.numero + (state.tavoloSelezionato.nome ? " · " + state.tavoloSelezionato.nome : "");
+    document.getElementById("ticketGiorno").textContent = giornoLabel(state.giorno);
+    document.getElementById("ticketFascia").textContent = state.fascia;
+    document.getElementById("ticketNome").textContent = nome + " " + cognome;
+    document.getElementById("ticketPersone").textContent = persone;
+    document.getElementById("ticketCode").textContent = "SF-" + nuovaPrenotazione.id.slice(-6).toUpperCase();
+    state.ultimaPrenotazione = nuovaPrenotazione;
     document.getElementById("bookingSuccessBox").style.display = "block";
+    bookingSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = "";
     renderPiazza();
     renderPrenotazioniPubbliche();
   }
- 
+
   document.getElementById("bookingSubmitBtn").addEventListener("click", attemptBooking);
   document.getElementById("bkTelefono").addEventListener("keydown", function(e){
     if(e.key === "Enter"){ e.preventDefault(); attemptBooking(); }
@@ -1377,10 +1567,56 @@
   document.getElementById("bookingSuccessCloseBtn").addEventListener("click", function(){
     document.getElementById("bookingInline").style.display = "none";
   });
+  document.getElementById("addToCalendarBtn").addEventListener("click", function(){
+    try{
+      var p = state.ultimaPrenotazione;
+      if(!p){ showToast("Nessuna prenotazione da aggiungere."); return; }
+      var anno = new Date().getFullYear();
+      var giornoNum = parseInt(p.giorno, 10);
+      var mese = 8; // agosto
+      var orari = p.fascia.split(" - ");
+      var oraInizio = orari[0].trim();
+      var oraFine = orari[1] ? orari[1].trim() : oraInizio;
+      var iniz = new Date(anno, mese-1, giornoNum, parseInt(oraInizio.split(":")[0],10), parseInt(oraInizio.split(":")[1],10));
+      var fine = new Date(anno, mese-1, giornoNum, parseInt(oraFine.split(":")[0],10), parseInt(oraFine.split(":")[1],10));
+      function pad(n){ return (n < 10 ? "0" : "") + n; }
+      function fmt(d){
+        return d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate()) + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00";
+      }
+      var ics = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//La Sagra di Fellegara//IT",
+        "BEGIN:VEVENT",
+        "UID:" + p.id + "@sagradifellegara",
+        "DTSTAMP:" + fmt(new Date()),
+        "DTSTART:" + fmt(iniz),
+        "DTEND:" + fmt(fine),
+        "SUMMARY:La Sagra di Fellegara - Tavolo " + p.tavoloNumero,
+        "DESCRIPTION:Prenotazione per " + p.persone + " persone a nome " + p.nome + " " + p.cognome,
+        "LOCATION:Via della Botte\\, 7\\, Fellegara",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+      var blob = new Blob([ics], {type: "text/calendar"});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "sagra-fellegara-tavolo" + p.tavoloNumero + ".ics";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+      showToast("Promemoria scaricato.");
+    }catch(e){
+      console.error("Errore generazione calendario:", e);
+      showToast("Errore nella generazione del promemoria.");
+    }
+  });
   document.getElementById("bookingOccupiedCloseBtn").addEventListener("click", function(){
     document.getElementById("bookingInline").style.display = "none";
   });
- 
+
   /* ---------- ricerca/annulla la propria prenotazione ---------- */
   document.getElementById("miaPrenotToggle").addEventListener("click", function(){
     var box = document.getElementById("miaPrenotInline");
@@ -1388,7 +1624,7 @@
     document.getElementById("bookingInline").style.display = "none";
     if(isHidden){
       box.style.display = "block";
-      document.getElementById("miaPrenotTel").value = "";
+      document.getElementById("miaPrenotTel").value = leggiTelefonoLocale();
       document.getElementById("miaPrenotRisultati").innerHTML = "";
       try{ box.scrollIntoView({behavior:"smooth", block:"start"}); }catch(e){}
     }else{
@@ -1398,7 +1634,7 @@
   document.getElementById("miaPrenotCloseBtn").addEventListener("click", function(){
     document.getElementById("miaPrenotInline").style.display = "none";
   });
- 
+
   function cercaMiaPrenotazione(){
     var tel = document.getElementById("miaPrenotTel").value.trim();
     var risultati = document.getElementById("miaPrenotRisultati");
@@ -1407,6 +1643,8 @@
       risultati.innerHTML = "<div class='field-error' style='display:block;'>Inserisci il numero di telefono.</div>";
       return;
     }
+    salvaTelefonoLocale(tel);
+    var tavoli = loadJSON(LS_TAVOLI, []);
     var prenotazioni = loadJSON(LS_PRENOTAZIONI, []).filter(function(p){
       return p.telefono.replace(/\s+/g,"") === tel.replace(/\s+/g,"");
     });
@@ -1417,11 +1655,18 @@
     prenotazioni
       .sort(function(a,b){ return a.ts - b.ts; })
       .forEach(function(p){
+        var tavoloRif = tavoli.filter(function(t){ return t.id === p.tavoloId; })[0];
         var row = document.createElement("div");
         row.className = "list-row";
         var left = document.createElement("div");
         left.innerHTML = "<strong>Tavolo " + escapeHTML(p.tavoloNumero) + "</strong> <span class='meta'>· " +
           escapeHTML(giornoLabel(p.giorno)) + " · " + escapeHTML(p.fascia) + " · " + escapeHTML(String(p.persone||"")) + " persone</span>";
+        var btnGroup = document.createElement("div");
+        btnGroup.style.cssText = "display:flex; gap:6px;";
+        var editBtn = document.createElement("button");
+        editBtn.className = "btn-secondary";
+        editBtn.style.cssText = "padding:6px 10px; font-size:.78rem; border-radius:8px;";
+        editBtn.textContent = "Modifica";
         var del = document.createElement("button");
         del.className = "btn-danger";
         del.textContent = "Annulla";
@@ -1435,8 +1680,55 @@
             cercaMiaPrenotazione();
           });
         });
+        editBtn.addEventListener("click", function(){
+          if(row.getAttribute("data-editing") === "1") return;
+          row.setAttribute("data-editing", "1");
+          var editRow = document.createElement("div");
+          editRow.className = "edit-row";
+          var maxPosti = tavoloRif ? tavoloRif.posti : "";
+          editRow.innerHTML =
+            "<div class='f' style='max-width:130px;'><label>Numero persone" + (maxPosti ? " (max " + escapeHTML(String(maxPosti)) + ")" : "") + "</label><input type='number' min='1' class='editPersone' value='" + escapeHTML(String(p.persone||1)) + "'></div>";
+          var saveBtn = document.createElement("button");
+          saveBtn.className = "btn btn-primary";
+          saveBtn.style.cssText = "margin-top:0; width:auto;";
+          saveBtn.textContent = "Salva";
+          var cancelBtn = document.createElement("button");
+          cancelBtn.className = "btn btn-secondary";
+          cancelBtn.style.cssText = "margin-top:0; width:auto;";
+          cancelBtn.textContent = "Annulla modifica";
+          editRow.appendChild(saveBtn);
+          editRow.appendChild(cancelBtn);
+          row.insertAdjacentElement("afterend", editRow);
+          row.style.display = "none";
+          saveBtn.addEventListener("click", function(){
+            var nuovoValore = parseInt(editRow.querySelector(".editPersone").value, 10);
+            if(isNaN(nuovoValore) || nuovoValore < 1){
+              showToast("Inserisci un numero di persone valido.");
+              return;
+            }
+            if(tavoloRif && parseInt(tavoloRif.posti,10) && nuovoValore > parseInt(tavoloRif.posti,10)){
+              showToast("Il tavolo ha al massimo " + tavoloRif.posti + " posti.");
+              return;
+            }
+            var pr = loadJSON(LS_PRENOTAZIONI, []);
+            var target = pr.filter(function(x){ return x.id === p.id; })[0];
+            if(target){ target.persone = nuovoValore; }
+            saveJSON(LS_PRENOTAZIONI, pr);
+            renderPiazza();
+            renderPrenotazioniPubbliche();
+            showToast("Prenotazione aggiornata.");
+            cercaMiaPrenotazione();
+          });
+          cancelBtn.addEventListener("click", function(){
+            editRow.remove();
+            row.style.display = "";
+            row.setAttribute("data-editing", "0");
+          });
+        });
+        btnGroup.appendChild(editBtn);
+        btnGroup.appendChild(del);
         row.appendChild(left);
-        row.appendChild(del);
+        row.appendChild(btnGroup);
         risultati.appendChild(row);
       });
   }
@@ -1444,9 +1736,9 @@
   document.getElementById("miaPrenotTel").addEventListener("keydown", function(e){
     if(e.key === "Enter"){ e.preventDefault(); cercaMiaPrenotazione(); }
   });
- 
+
   /* ================= ADMIN ================= */
- 
+
   var memoryAdminSession = false;
   function isAdminLoggedIn(){
     try{ return sessionStorage.getItem(SS_ADMIN) === "1"; }
@@ -1459,11 +1751,11 @@
     }catch(e){ /* ignore */ }
     memoryAdminSession = val;
   }
- 
+
   document.getElementById("refreshPageBtn").addEventListener("click", function(){
     location.reload();
   });
- 
+
   document.getElementById("openAdminLogin").addEventListener("click", function(){
     var section = document.getElementById("adminInline");
     var isHidden = (section.style.display === "none" || section.style.display === "");
@@ -1482,11 +1774,11 @@
       section.style.display = "none";
     }
   });
- 
+
   document.getElementById("adminCloseBtn1").addEventListener("click", function(){
     document.getElementById("adminInline").style.display = "none";
   });
- 
+
   document.getElementById("passToggle").addEventListener("click", function(){
     var input = document.getElementById("adminPass");
     if(input.type === "password"){
@@ -1499,7 +1791,7 @@
       this.setAttribute("aria-label", "Mostra password");
     }
   });
- 
+
   function attemptLogin(){
     var pass = document.getElementById("adminPass").value.trim();
     var err = document.getElementById("loginError");
@@ -1518,18 +1810,18 @@
       err.style.display = "block";
     }
   }
- 
+
   document.getElementById("loginSubmitBtn").addEventListener("click", attemptLogin);
   document.getElementById("adminPass").addEventListener("keydown", function(e){
     if(e.key === "Enter"){ e.preventDefault(); attemptLogin(); }
   });
- 
+
   document.getElementById("adminLogoutBtn").addEventListener("click", function(){
     setAdminLoggedIn(false);
     document.getElementById("adminInline").style.display = "none";
     showToast("Sei uscito dall'area titolare.");
   });
- 
+
   document.getElementById("downloadBackupBtn").addEventListener("click", function(){
     try{
       var backup = {
@@ -1557,7 +1849,7 @@
       showToast("Errore durante il backup: " + e.message);
     }
   });
- 
+
   function openAdminPanel(){
     document.getElementById("adminLoginBox").style.display = "none";
     document.getElementById("adminPanelBox").style.display = "block";
@@ -1565,7 +1857,7 @@
     renderAdminTavoli();
     renderAdminPrenotazioni();
   }
- 
+
   /* --- admin tabs interni --- */
   document.querySelectorAll(".admin-tab-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
@@ -1576,7 +1868,7 @@
       document.getElementById("admin-" + target).classList.add("active");
     });
   });
- 
+
   /* --- admin: gestione menu --- */
   function renderAdminMenu(){
     var menu = loadJSON(LS_MENU, MENU_EMPTY);
@@ -1584,7 +1876,7 @@
     list.innerHTML = "";
     MENU_CATS.forEach(function(cat){
       var h = document.createElement("div");
-      h.style.cssText = "font-family:'Fraunces',serif;color:var(--gold-soft);margin:14px 0 4px;font-size:1.05rem;";
+      h.style.cssText = "font-family:'Fraunces',serif;color:" + CAT_META[cat].color + ";margin:14px 0 4px;font-size:1.05rem;";
       h.textContent = CAT_META[cat].icon + " " + CAT_META[cat].label;
       list.appendChild(h);
       var items = menu[cat] || [];
@@ -1665,7 +1957,7 @@
       });
     });
   }
- 
+
   document.getElementById("addItemBtn").addEventListener("click", function(){
     var cat = document.getElementById("newItemCat").value;
     var nomeEl = document.getElementById("newItemNome");
@@ -1686,7 +1978,7 @@
     renderMenuPublic();
     showToast("Voce aggiunta al menu.");
   });
- 
+
   /* --- admin: gestione tavoli --- */
   function renderAdminTavoli(){
     var tavoli = loadJSON(LS_TAVOLI, []);
@@ -1784,7 +2076,7 @@
         list.appendChild(row);
       });
   }
- 
+
   document.getElementById("addTavoloBtn").addEventListener("click", function(){
     var numEl = document.getElementById("newTavNum");
     var nomeEl = document.getElementById("newTavNome");
@@ -1808,14 +2100,14 @@
     renderPiazza();
     showToast("Tavolo aggiunto.");
   });
- 
+
   /* --- admin: elenco prenotazioni --- */
   function renderAdminPrenotazioni(){
     var prenotazioniRaw = loadJSON(LS_PRENOTAZIONI, []);
     var prenotazioni = prenotazioniRaw.slice().sort(function(a,b){ return b.ts - a.ts; });
     var wrap = document.getElementById("adminPrenotList");
     wrap.innerHTML = "";
- 
+
     if(prenotazioniRaw.length > 0){
       // riepilogo aggregato per giorno + fascia
       var gruppi = {};
@@ -1843,7 +2135,7 @@
       riepTable.appendChild(riepBody);
       wrap.appendChild(riepTable);
     }
- 
+
     if(prenotazioni.length === 0){
       var e = document.createElement("div");
       e.className = "empty-admin";
@@ -1887,7 +2179,7 @@
     table.appendChild(tbody);
     wrap.appendChild(table);
   }
- 
+
   /* conferma inline al posto del confirm() nativo, spesso bloccato nei browser integrati (es. app di messaggistica) */
   function askConfirmInline(btn, message, onYes){
     if(btn.getAttribute("data-confirming") === "1") return;
@@ -1921,7 +2213,7 @@
       btn.setAttribute("data-confirming", "0");
     });
   }
- 
+
   function escapeHTML(str){
     return String(str)
       .replace(/&/g,"&amp;")
@@ -1929,15 +2221,23 @@
       .replace(/>/g,"&gt;")
       .replace(/"/g,"&quot;");
   }
- 
+
+  /* ---------- aggiornamento automatico della piantina ---------- */
+  setInterval(function(){
+    var piantinaAttiva = document.getElementById("view-piantina").classList.contains("active");
+    var formPrenotazioneAperto = document.getElementById("bookingInline").style.display === "block";
+    if(piantinaAttiva && !formPrenotazioneAperto && state.giorno && state.fascia){
+      renderPiazza();
+    }
+  }, 15000);
+
   /* ---------- init ---------- */
   renderMenuPublic();
   renderPrenotazioniPubbliche();
   renderPiazza();
   initFirebaseSync();
- 
+
 })();
 </script>
 </body>
 </html>
- 

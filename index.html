@@ -257,6 +257,20 @@
     color:var(--gold);
     white-space:nowrap;
   }
+  .menu-item.esaurito .nome{
+    text-decoration:line-through;
+    color:#8a84ac;
+  }
+  .menu-item.esaurito .prezzo{
+    opacity:.5;
+  }
+  .privacy-note{
+    font-size:.72rem;
+    color:#8a84ac;
+    text-align:center;
+    margin:12px 0 0;
+    line-height:1.4;
+  }
 
   /* ---------- piantina ---------- */
   .fascia-picker{
@@ -766,14 +780,14 @@
     <button class="tab-btn" data-view="piantina">🪑 Prenota un tavolo</button>
   </div>
   <div class="social-row">
-    <a class="ig-btn" href="https://www.instagram.com/nuovafellegara" target="_blank" rel="noopener noreferrer" aria-label="Seguici su Instagram @nuovafellegara" title="Seguici su Instagram @nuovafellegara">
+    <a class="ig-btn" href="https://www.instagram.com/nuovafellegara" aria-label="Seguici su Instagram @nuovafellegara" title="Seguici su Instagram @nuovafellegara">
       <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5.5"></rect>
         <circle cx="12" cy="12" r="4.2"></circle>
         <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle>
       </svg>
     </a>
-    <a class="ig-btn wa-btn" href="https://wa.me/393497225376" target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp" title="Scrivici su WhatsApp">
+    <a class="ig-btn wa-btn" href="https://wa.me/393497225376" aria-label="Scrivici su WhatsApp" title="Scrivici su WhatsApp">
       <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
         <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm0 18.2h-.01a8.24 8.24 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.55 3.7-8.25 8.26-8.25 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.84c0 4.55-3.71 8.23-8.26 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.13.17 1.73 2.64 4.2 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/>
       </svg>
@@ -859,6 +873,7 @@
 
       <!-- ADMIN: PRENOTAZIONI -->
       <div class="admin-section" id="admin-prenotazioni">
+        <input type="text" id="prenotSearchInput" placeholder="🔍 Cerca per nome o telefono..." style="margin-bottom:14px;">
         <div id="adminPrenotList" style="overflow-x:auto; -webkit-overflow-scrolling:touch;"></div>
       </div>
 
@@ -903,6 +918,7 @@
     <div class="legend">
       <span><i class="dot libero"></i> Libero</span>
       <span><i class="dot occupato"></i> Occupato</span>
+      <span><i class="dot" style="background:#6b6693; box-shadow:0 0 8px rgba(107,102,147,.7);"></i> Non disponibile</span>
     </div>
     <div class="riepilogo-posti" id="riepilogoPosti"></div>
     <div id="piazzaWrap"></div>
@@ -935,9 +951,12 @@
         <input type="tel" id="bkTelefono" placeholder="333 1234567">
         <label for="bkPersone">Numero di persone</label>
         <input type="number" id="bkPersone" min="1" placeholder="4">
+        <label for="bkNote">Note (opzionale)</label>
+        <input type="text" id="bkNote" placeholder="Es. allergie, intolleranze, esigenze particolari">
         <div class="field-error" id="bookingError">Compila tutti i campi.</div>
         <button type="button" class="btn btn-primary" id="bookingSubmitBtn">Conferma prenotazione</button>
         <button type="button" class="btn btn-secondary" style="width:100%; margin-top:8px;" id="bookingCancelBtn">Annulla</button>
+        <p class="privacy-note">I tuoi dati (nome, telefono) vengono usati solo per gestire la prenotazione del tavolo e non sono condivisi con terzi.</p>
       </div>
 
       <!-- messaggio di successo: biglietto -->
@@ -952,6 +971,7 @@
               <div class="ticket-row"><span>Fascia</span><strong id="ticketFascia"></strong></div>
               <div class="ticket-row"><span>Nome</span><strong id="ticketNome"></strong></div>
               <div class="ticket-row"><span>Persone</span><strong id="ticketPersone"></strong></div>
+              <div class="ticket-row" id="ticketNoteRow" style="display:none;"><span>Note</span><strong id="ticketNote"></strong></div>
             </div>
           </div>
           <div class="ticket-divider"></div>
@@ -966,8 +986,8 @@
 
       <!-- tavolo occupato -->
       <div id="bookingOccupiedBox" class="admin-box" style="display:none; text-align:center;">
-        <h2>Tavolo occupato</h2>
-        <p class="desc">Questo tavolo è già stato prenotato per questo giorno e fascia oraria. Scegli un tavolo verde oppure prova un altro giorno/fascia.</p>
+        <h2 id="bookingOccupiedTitle">Tavolo occupato</h2>
+        <p class="desc" id="bookingOccupiedText">Questo tavolo è già stato prenotato per questo giorno e fascia oraria. Scegli un tavolo verde oppure prova un altro giorno/fascia.</p>
         <button type="button" class="btn btn-secondary" style="width:100%" id="bookingOccupiedCloseBtn">Ho capito</button>
       </div>
 
@@ -976,7 +996,7 @@
 
 </main>
 
-<footer>La Sagra di Fellegara · <span id="versionTag">v18</span></footer>
+<footer>La Sagra di Fellegara · <span id="versionTag">v22</span></footer>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
@@ -1256,10 +1276,10 @@
       }else{
         items.forEach(function(it){
           var row = document.createElement("div");
-          row.className = "menu-item";
+          row.className = "menu-item" + (it.esaurito ? " esaurito" : "");
           var nome = document.createElement("span");
           nome.className = "nome";
-          nome.textContent = it.nome;
+          nome.textContent = it.nome + (it.esaurito ? " (esaurito)" : "");
           var leader = document.createElement("span");
           leader.className = "leader";
           var prezzo = document.createElement("span");
@@ -1338,8 +1358,25 @@
     if(mp) mp.style.display = "none";
   }
 
+  /* disabilita i giorni della sagra già trascorsi (confronto con la data odierna, anno corrente) */
+  (function disabilitaGiorniPassati(){
+    var oggi = new Date();
+    var oggiSenzaOra = new Date(oggi.getFullYear(), oggi.getMonth(), oggi.getDate());
+    document.querySelectorAll(".giorno-btn").forEach(function(btn){
+      var g = parseInt(btn.getAttribute("data-giorno"), 10);
+      var dataGiorno = new Date(oggi.getFullYear(), 7, g); // mese 7 = agosto (0-indicizzato)
+      if(dataGiorno < oggiSenzaOra){
+        btn.disabled = true;
+        btn.style.opacity = ".35";
+        btn.style.cursor = "not-allowed";
+        btn.title = "Questo giorno è già passato";
+      }
+    });
+  })();
+
   document.querySelectorAll(".giorno-btn").forEach(function(btn){
     btn.addEventListener("click", function(){
+      if(btn.disabled) return;
       document.querySelectorAll(".giorno-btn").forEach(function(b){ b.classList.remove("active"); });
       btn.classList.add("active");
       state.giorno = btn.getAttribute("data-giorno");
@@ -1391,9 +1428,12 @@
     var prenotazioniSlot = prenotazioni.filter(function(p){ return p.giorno === state.giorno && p.fascia === state.fascia; });
 
     if(riepilogo){
-      var liberi = tavoli.length - prenotazioniSlot.length;
+      var tavoliDisponibili = tavoli.filter(function(t){ return t.disponibile !== false; });
+      var nonDisponibiliCount = tavoli.length - tavoliDisponibili.length;
+      var liberi = tavoliDisponibili.filter(function(t){ return !prenotazioniSlot.some(function(p){ return p.tavoloId === t.id; }); }).length;
       var personeTot = prenotazioniSlot.reduce(function(sum,p){ return sum + (parseInt(p.persone,10) || 0); }, 0);
-      riepilogo.innerHTML = "<strong>" + liberi + "</strong> tavoli liberi su <strong>" + tavoli.length + "</strong> · <strong>" + personeTot + "</strong> persone attese";
+      riepilogo.innerHTML = "<strong>" + liberi + "</strong> tavoli liberi su <strong>" + tavoliDisponibili.length + "</strong> · <strong>" + personeTot + "</strong> persone attese" +
+        (nonDisponibiliCount > 0 ? " · <strong>" + nonDisponibiliCount + "</strong> non disponibili" : "");
     }
 
     var piazza = document.createElement("div");
@@ -1403,6 +1443,7 @@
       .slice()
       .sort(function(a,b){ return (parseFloat(a.numero)||0) - (parseFloat(b.numero)||0); })
       .forEach(function(t, idx){
+        var nonDisponibile = t.disponibile === false;
         var occupata = prenotazioniSlot.some(function(p){ return p.tavoloId === t.id; });
         var cloth = CLOTH_PAIRS[idx % CLOTH_PAIRS.length];
 
@@ -1413,7 +1454,11 @@
         el.className = "tavolo";
         el.style.setProperty("--cloth-a", cloth[0]);
         el.style.setProperty("--cloth-b", cloth[1]);
-        if(occupata){
+        if(nonDisponibile){
+          el.style.setProperty("--stato-color", "#6b6693");
+          el.style.setProperty("--stato-glow", "rgba(107,102,147,.45)");
+          el.style.opacity = ".55";
+        }else if(occupata){
           el.style.setProperty("--stato-color", "var(--red-occ)");
           el.style.setProperty("--stato-glow", "rgba(193,68,45,.55)");
         }else{
@@ -1423,16 +1468,23 @@
         el.innerHTML = '<span class="num">' + t.numero + '</span><span class="posti">' + t.posti + ' posti</span>';
         el.setAttribute("role","button");
         el.setAttribute("tabindex","0");
-        el.setAttribute("aria-label", "Tavolo " + t.numero + (occupata ? ", occupato" : ", libero"));
+        el.setAttribute("aria-label", "Tavolo " + t.numero + (nonDisponibile ? ", non disponibile" : (occupata ? ", occupato" : ", libero")));
 
-        (function(tav, isOcc){
+        (function(tav, isOcc, isNonDisp){
           function onActivate(){
             var inline = document.getElementById("bookingInline");
             document.getElementById("bookingFormBox").style.display = "none";
             document.getElementById("bookingSuccessBox").style.display = "none";
             document.getElementById("bookingOccupiedBox").style.display = "none";
-            if(isOcc){
+            if(isNonDisp){
               inline.style.display = "block";
+              document.getElementById("bookingOccupiedTitle").textContent = "Tavolo non disponibile";
+              document.getElementById("bookingOccupiedText").textContent = "Questo tavolo non è disponibile al momento. Prova un altro tavolo.";
+              document.getElementById("bookingOccupiedBox").style.display = "block";
+            }else if(isOcc){
+              inline.style.display = "block";
+              document.getElementById("bookingOccupiedTitle").textContent = "Tavolo occupato";
+              document.getElementById("bookingOccupiedText").textContent = "Questo tavolo è già stato prenotato per questo giorno e fascia oraria. Scegli un tavolo verde oppure prova un altro giorno/fascia.";
               document.getElementById("bookingOccupiedBox").style.display = "block";
             }else{
               state.tavoloSelezionato = tav;
@@ -1443,6 +1495,7 @@
               document.getElementById("bkCognome").value = "";
               document.getElementById("bkTelefono").value = leggiTelefonoLocale();
               document.getElementById("bkPersone").value = "";
+              document.getElementById("bkNote").value = "";
               document.getElementById("bkPersone").setAttribute("max", tav.posti);
               document.getElementById("bookingError").style.display = "none";
               inline.style.display = "block";
@@ -1454,7 +1507,7 @@
           el.addEventListener("keydown", function(e){
             if(e.key === "Enter" || e.key === " "){ e.preventDefault(); onActivate(); }
           });
-        })(t, occupata);
+        })(t, occupata, nonDisponibile);
 
         tavWrap.appendChild(el);
         if(t.nome){
@@ -1483,6 +1536,7 @@
     var telefono = document.getElementById("bkTelefono").value.trim();
     var personeStr = document.getElementById("bkPersone").value.trim();
     var persone = parseInt(personeStr, 10);
+    var note = document.getElementById("bkNote").value.trim();
     var errEl = document.getElementById("bookingError");
     var submitBtn = document.getElementById("bookingSubmitBtn");
     if(!nome || !cognome || !telefono || !personeStr){
@@ -1535,6 +1589,7 @@
       cognome: cognome,
       telefono: telefono,
       persone: persone,
+      note: note,
       ts: Date.now()
     };
     prenotazioni.push(nuovaPrenotazione);
@@ -1547,6 +1602,12 @@
     document.getElementById("ticketFascia").textContent = state.fascia;
     document.getElementById("ticketNome").textContent = nome + " " + cognome;
     document.getElementById("ticketPersone").textContent = persone;
+    if(note){
+      document.getElementById("ticketNote").textContent = note;
+      document.getElementById("ticketNoteRow").style.display = "flex";
+    }else{
+      document.getElementById("ticketNoteRow").style.display = "none";
+    }
     document.getElementById("ticketCode").textContent = "SF-" + nuovaPrenotazione.id.slice(-6).toUpperCase();
     state.ultimaPrenotazione = nuovaPrenotazione;
     document.getElementById("bookingSuccessBox").style.display = "block";
@@ -1822,6 +1883,10 @@
     showToast("Sei uscito dall'area titolare.");
   });
 
+  document.getElementById("prenotSearchInput").addEventListener("input", function(){
+    renderAdminPrenotazioni();
+  });
+
   document.getElementById("downloadBackupBtn").addEventListener("click", function(){
     try{
       var backup = {
@@ -1890,9 +1955,22 @@
         var row = document.createElement("div");
         row.className = "list-row";
         var left = document.createElement("div");
-        left.innerHTML = "<strong>" + escapeHTML(it.nome) + "</strong> <span class='meta'>€ " + escapeHTML(it.prezzo) + "</span>";
+        left.innerHTML = "<strong>" + escapeHTML(it.nome) + "</strong> <span class='meta'>€ " + escapeHTML(it.prezzo) + "</span>" +
+          (it.esaurito ? " <span class='meta' style='color:var(--red-occ);'>· esaurito</span>" : "");
         var btnGroup = document.createElement("div");
-        btnGroup.style.cssText = "display:flex; gap:6px;";
+        btnGroup.style.cssText = "display:flex; gap:6px; flex-wrap:wrap;";
+        var esauritoBtn = document.createElement("button");
+        esauritoBtn.className = "btn-secondary";
+        esauritoBtn.style.cssText = "padding:6px 10px; font-size:.78rem; border-radius:8px;";
+        esauritoBtn.textContent = it.esaurito ? "Segna disponibile" : "Segna esaurito";
+        esauritoBtn.addEventListener("click", function(){
+          var m = loadJSON(LS_MENU, MENU_EMPTY);
+          var target = (m[cat] || []).filter(function(x){ return x.id === it.id; })[0];
+          if(target){ target.esaurito = !target.esaurito; }
+          saveJSON(LS_MENU, m);
+          renderAdminMenu();
+          renderMenuPublic();
+        });
         var editBtn = document.createElement("button");
         editBtn.className = "btn-secondary";
         editBtn.style.cssText = "padding:6px 10px; font-size:.78rem; border-radius:8px;";
@@ -1949,6 +2027,7 @@
             row.setAttribute("data-editing", "0");
           });
         });
+        btnGroup.appendChild(esauritoBtn);
         btnGroup.appendChild(editBtn);
         btnGroup.appendChild(del);
         row.appendChild(left);
@@ -1997,12 +2076,26 @@
       .forEach(function(t){
         var row = document.createElement("div");
         row.className = "list-row";
+        var nonDisponibile = t.disponibile === false;
         var left = document.createElement("div");
         left.innerHTML = "<strong>Tavolo " + escapeHTML(t.numero) + "</strong> " +
           (t.nome ? "<span class='meta'>· " + escapeHTML(t.nome) + "</span>" : "") +
-          " <span class='meta'>· max " + escapeHTML(t.posti) + " posti</span>";
+          " <span class='meta'>· max " + escapeHTML(t.posti) + " posti</span>" +
+          (nonDisponibile ? " <span class='meta' style='color:var(--red-occ);'>· non disponibile</span>" : "");
         var btnGroup = document.createElement("div");
-        btnGroup.style.cssText = "display:flex; gap:6px;";
+        btnGroup.style.cssText = "display:flex; gap:6px; flex-wrap:wrap;";
+        var toggleBtn = document.createElement("button");
+        toggleBtn.className = "btn-secondary";
+        toggleBtn.style.cssText = "padding:6px 10px; font-size:.78rem; border-radius:8px;";
+        toggleBtn.textContent = nonDisponibile ? "Rendi disponibile" : "Rendi non disponibile";
+        toggleBtn.addEventListener("click", function(){
+          var tv = loadJSON(LS_TAVOLI, []);
+          var target = tv.filter(function(x){ return x.id === t.id; })[0];
+          if(target){ target.disponibile = nonDisponibile ? true : false; }
+          saveJSON(LS_TAVOLI, tv);
+          renderAdminTavoli();
+          renderPiazza();
+        });
         var editBtn = document.createElement("button");
         editBtn.className = "btn-secondary";
         editBtn.style.cssText = "padding:6px 10px; font-size:.78rem; border-radius:8px;";
@@ -2069,6 +2162,7 @@
             row.setAttribute("data-editing", "0");
           });
         });
+        btnGroup.appendChild(toggleBtn);
         btnGroup.appendChild(editBtn);
         btnGroup.appendChild(del);
         row.appendChild(left);
@@ -2104,7 +2198,14 @@
   /* --- admin: elenco prenotazioni --- */
   function renderAdminPrenotazioni(){
     var prenotazioniRaw = loadJSON(LS_PRENOTAZIONI, []);
+    var termine = (document.getElementById("prenotSearchInput").value || "").trim().toLowerCase();
     var prenotazioni = prenotazioniRaw.slice().sort(function(a,b){ return b.ts - a.ts; });
+    if(termine){
+      prenotazioni = prenotazioni.filter(function(p){
+        var testo = ((p.nome||"") + " " + (p.cognome||"") + " " + (p.telefono||"")).toLowerCase();
+        return testo.indexOf(termine) !== -1;
+      });
+    }
     var wrap = document.getElementById("adminPrenotList");
     wrap.innerHTML = "";
 
@@ -2139,13 +2240,13 @@
     if(prenotazioni.length === 0){
       var e = document.createElement("div");
       e.className = "empty-admin";
-      e.textContent = "Nessuna prenotazione ricevuta finora.";
+      e.textContent = termine ? "Nessuna prenotazione corrisponde alla ricerca." : "Nessuna prenotazione ricevuta finora.";
       wrap.appendChild(e);
       return;
     }
     var table = document.createElement("table");
     table.className = "prenot";
-    table.innerHTML = "<thead><tr><th>Giorno</th><th>Fascia</th><th>Tavolo</th><th>Persone</th><th>Cliente</th><th>Telefono</th><th>Ricevuta il</th><th></th></tr></thead>";
+    table.innerHTML = "<thead><tr><th>Giorno</th><th>Fascia</th><th>Tavolo</th><th>Persone</th><th>Cliente</th><th>Telefono</th><th>Note</th><th>Ricevuta il</th><th></th></tr></thead>";
     var tbody = document.createElement("tbody");
     prenotazioni.forEach(function(p){
       var tr = document.createElement("tr");
@@ -2158,6 +2259,7 @@
         "<td>" + escapeHTML(String(p.persone||"")) + "</td>" +
         "<td>" + escapeHTML(p.nome) + " " + escapeHTML(p.cognome) + "</td>" +
         "<td>" + escapeHTML(p.telefono) + "</td>" +
+        "<td>" + escapeHTML(p.note||"") + "</td>" +
         "<td>" + dataStr + "</td>";
       var tdBtn = document.createElement("td");
       var del = document.createElement("button");
